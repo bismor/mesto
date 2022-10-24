@@ -1,0 +1,35 @@
+.mesto {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mesto__title {
+  font-family: "Inter";
+  font-style: Black;
+  font-size: 24px;
+  line-height: 29px;
+  margin: 0;
+}
+
+.mesto__element {
+  border-radius: 5%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+}
+
+.reaction {
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding-bottom: 31px;
+}
+
+.mesto__img {
+  width: 100%;
+  object-fit: contain;
+}

@@ -1,0 +1,40 @@
+@import url("../vendor/inter.css");
+@import url("../vendor/normalize.css");
+@import url("../pages/profile/profile.css");
+@import url("../pages/mesto/mesto.css");
+
+.body {
+  background-color: black;
+  max-width: 100%;
+  margin: 0;
+}
+
+.page {
+ padding-left: 8.4375vw;
+ padding-top: 28px;
+ padding-bottom: 31.6px;
+ border-bottom: solid 1px #545454;
+}
+
+.main {
+  padding-top: 42px;
+  max-width: 88.125vw;
+  margin: 0 auto 0 auto;
+}
+
+.footer {
+  padding-top: 48px;
+  padding-bottom: 36px;
+  padding-left: 5.9375vw;
+}
+
+
+.footer__text {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 14px;
+  line-height: 17px;
+  line-height: 100%;
+  color: #545454;
+  margin: 0;
+}

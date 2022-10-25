@@ -16,15 +16,19 @@
     </div>
     <main class="main">
       <section class="profile">
-         <img class="profile__avatar" src="./images/avatar.png" alt="Аватар"/>
-        <div class="profile__info">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <img class="profile__pencil" src="./images/pencil.svg" alt="карандаш"/>
-          <p class="profile__subtitle">Исследователь океана</p>
+        <div class="info">
+          <img class="profile__avatar" src="./images/avatar.png" alt="Аватар"/>
+          <div class="profile__info">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <button class="profile__button">
+              <img class="button__pencil" src="./images/pencil.svg" alt="карандаш"/>
+            </button>
+            <p class="profile__subtitle">Исследователь океана</p>
+          </div>
         </div>
-        <div class="button">
+        <button class="button">
           <img class="profile__plus" src="./images/plus.svg" alt="добавить"/>
-        </div>
+        </button>
       </section>
       <section class="mesto">
         <div class="mesto__element">
@@ -74,5 +78,17 @@
     <footer class="footer">
       <h3 class="footer__text">© 2020 Mesto Russia</h3>
     </footer>
+
+    <div class="popup">
+      <img  class="popup__close" src="./images/Close.png" alt="Закрыть">
+      <div class="popup__container">
+        <h1 class="popup__title">Редактировать профиль</h1>
+        <input type="text" class="popup__text popup__name" placeholder="Жак-Ив Кусто">
+        <input type="text" class="popup__text popup__job" placeholder="Исследователь океана">
+        <button class="popup__button">Сохранить</button>
+      </div>
+    </div>
+
+    <script src="./script/script.js"></script>
   </body>
 </html>

@@ -5,7 +5,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background: url("../../../../mesto/images/like.svg");
+  background: url("../../../images/like.svg");
   border: none;
 }
 
@@ -14,5 +14,5 @@
 }
 
 .mesto__like.active {
-  background: url("../../../../mesto/images/color-black.png");
+  background: url("../../../images/color-black.png");
 }

@@ -1,0 +1,18 @@
+.mesto__like {
+  cursor: pointer;
+  width: 22px;
+  height: 19px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background: url("/images/like.svg");
+  border: none;
+}
+
+.mesto__like:hover {
+  opacity: 50%;
+}
+
+.mesto__like.active {
+  background: url("/images/color-black.png");
+}

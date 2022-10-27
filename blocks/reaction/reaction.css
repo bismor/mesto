@@ -1,0 +1,7 @@
+.reaction {
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding-bottom: 31px;
+  align-items: baseline;
+}

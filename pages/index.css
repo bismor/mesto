@@ -1,85 +1,51 @@
 @import url("../vendor/inter.css");
 @import url("../vendor/normalize.css");
-@import url("../pages/profile/profile.css");
-@import url("../pages/mesto/mesto.css");
-@import url("../pages/popup/popup.css");
 
-.body {
-  background-color: black;
-  max-width: 100%;
-  margin: 0;
-}
+@import url("../blocks/button/button.css");
+@import url("../blocks/button/__pencil/button__pencil.css");
 
-@media screen and (min-width: 1280px) {
-  .body {
-    display: flex;
-    flex-direction: column;
+@import url("../blocks/footer/footer.css");
+@import url("../blocks/footer/__text/footer__text.css");
 
-  }
-}
+@import url("../blocks/header/header.css");
+@import url("../blocks/header/__logo/header__logo.css");
 
-.page {
- padding-left: 8.4375vw;
- padding-top: 28px;
- padding-bottom: 31.6px;
- border-bottom: solid 1px #545454;
-}
+@import url("../blocks/info/info.css");
 
-@media screen and (min-width: 1280px) {
-  .page {
-    width: 880px;
-    margin: 0 auto;
-    padding-left: 0;
-    padding-top: 45px;
-    padding-bottom: 45px;
-  }
-}
+@import url("../blocks/main/main.css");
 
-.header__logo {
-  max-width: 32.41875vw;
-}
+@import url("../blocks/mesto/mesto.css");
+@import url("../blocks/mesto/__element/mesto__element.css");
+@import url("../blocks/mesto/__img/mesto__img.css");
+@import url("../blocks/mesto/__like/mesto__like.css");
+@import url("../blocks/mesto/__title/mesto__title.css");
 
-.main {
-  padding-top: 42px;
-  max-width: 88.125vw;
-  margin: 0 auto 0 auto;
-}
+@import url("../blocks/page/page.css");
 
-@media screen and (min-width: 1280px) {
-  .main {
-    max-width: 880px;
-    padding-top: 36.25px;
-  }
-}
+@import url("../blocks/popup/popup.css");
+@import url("../blocks/popup/__button/popup__button.css");
+@import url("../blocks/popup/__close/popup__close.css");
+@import url("../blocks/popup/__container/popup__container.css");
+@import url("../blocks/popup/__form/popup__form.css");
+@import url("../blocks/popup/__text/popup__text.css");
+@import url("../blocks/popup/__title/popup__title.css");
 
-.footer {
-  padding-top: 48px;
-  padding-bottom: 36px;
-  padding-left: 5.9375vw;
-}
+@import url("../blocks/profile/profile.css");
+@import url("../blocks/profile/__avatar/profile__avatar.css");
+@import url("../blocks/profile/__button/profile__button.css");
+@import url("../blocks/profile/__info/profile__info.css");
+@import url("../blocks/profile/__plus/profile__plus.css");
+@import url("../blocks/profile/__subtitle/profile__subtitle.css");
+@import url("../blocks/profile/__title/profile__title.css");
 
-@media screen and (min-width: 1280px) {
-  .footer {
-    padding-top: 67px;
-    padding-left: 0;
-    width: 880px;
-    margin: 0 auto;
-  }
-}
+@import url("../blocks/reaction/reaction.css");
 
 
-.footer__text {
-  font-family: "Inter", sans-serif;
-  font-style: Regular;
-  font-size: 14px;
-  line-height: 17px;
-  color: #545454;
-  margin: 0;
-}
 
-@media screen and (min-width: 1280px) {
-  .footer__text {
-    font-size: 18px;
-    line-height: 22px;
-  }
-}
+
+
+
+
+
+
+

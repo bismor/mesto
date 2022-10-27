@@ -1,34 +1,37 @@
 let openPopup = document.querySelector('.profile__button');
-let Popup = document.querySelector('.popup');
-let closePopup = document.querySelector('.popup__close');
-let ProfileName = document.querySelector('.profile__title');
-let ProfileJob = document.querySelector('.profile__subtitle');
+let popup = document.querySelector('.popup');
+let closePopup = popup.querySelector('.popup__close');
+let profileName = document.querySelector('.profile__title');
+let profileJob = document.querySelector('.profile__subtitle');
+let likeClick = document.querySelectorAll('.mesto__like');
+let formElement = popup.querySelector('.popup__form');
+let nameInput = popup.querySelector('.popup__name');
+let jobInput = popup.querySelector('.popup__job');
 
-let formElement = Popup.querySelector('.popup__button');
-console.log(formElement)
-let nameInput = Popup.querySelector('.popup__name');
-let jobInput = Popup.querySelector('.popup__job');
 
-
-function formSubmitHandler (evt) {
+function formSubmitHandler(evt) {
   evt.preventDefault();
 
-  ProfileName.textContent = nameInput.value;
-  ProfileJob.textContent = jobInput.value
-  console.log(ProfileName)
-  console.log(ProfileJob)
-}
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  clickclosePopup()
+};
 
 formElement.addEventListener('submit', formSubmitHandler);
 
-function ClickOpenPopup () {
-  Popup.classList.add('active');
+function clickOpenPopup () {
+  popup.classList.add('active');
 };
 
-function ClickclosePopup () {
-  Popup.classList.remove('active');
+function clickclosePopup () {
+  popup.classList.remove('active');
 };
 
-closePopup.addEventListener('click',ClickclosePopup);
-openPopup.addEventListener('click', ClickOpenPopup);
+function clickLike () {
+  likeClick.classList.add('active');
+};
+
+likeClick.addEventListener('click', clickLike);
+closePopup.addEventListener('click',clickclosePopup);
+openPopup.addEventListener('click', clickOpenPopup);
 

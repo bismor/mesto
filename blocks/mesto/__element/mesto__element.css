@@ -1,0 +1,8 @@
+.mesto__element {
+  border-radius: 5%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+}

@@ -1,0 +1,12 @@
+.page {
+  background-color: black;
+  max-width: 100%;
+  margin: 0;
+}
+
+@media screen and (min-width: 1280px) {
+  .page {
+    display: flex;
+    flex-direction: column;
+  }
+}

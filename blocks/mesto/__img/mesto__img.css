@@ -1,0 +1,11 @@
+.mesto__img {
+  border-radius: 5% 5% 0 0;
+  width: 100%;
+  object-fit: contain;
+}
+
+@media screen and (min-width: 1280px) {
+  .mesto__img {
+    width: 282px;
+  }
+}

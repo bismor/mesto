@@ -2,7 +2,7 @@
 @import url("../vendor/normalize.css");
 
 @import url("../blocks/button/button.css");
-@import url("../blocks/button/__pencil/button__pencil.css");
+
 
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__text/footer__text.css");
@@ -37,6 +37,7 @@
 @import url("../blocks/profile/__plus/profile__plus.css");
 @import url("../blocks/profile/__subtitle/profile__subtitle.css");
 @import url("../blocks/profile/__title/profile__title.css");
+@import url("../blocks/profile/__pencil/profile__pencil.css");
 
 @import url("../blocks/reaction/reaction.css");
 

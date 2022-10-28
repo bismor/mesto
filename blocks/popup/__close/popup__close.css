@@ -1,17 +1,20 @@
 .popup__close {
   position: absolute;
   max-width: 6.25vw;
-  object-fit: contain;
-  top: 87px;
-  right: 5.9375%;
+  top: -32px;
+  right: 0;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0;
 }
 
 @media screen and (min-width: 1280px) {
   .popup__close {
     max-width: 32px;
-    top: 155px;
-    right: 30.078125%;
+    width: 32px;
+    top: -40px;
+    right: -40px;
   }
 }
 

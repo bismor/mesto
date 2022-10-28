@@ -12,6 +12,7 @@
   width: 74.375vw;
   height: 46px;
   align-self: center;
+  border: none;
 }
 
 @media screen and (min-width: 1280px) {

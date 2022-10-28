@@ -7,12 +7,13 @@
   background-position: center;
   background: url("../../../images/like.svg");
   border: none;
+  margin-left: auto;
 }
 
 .mesto__like:hover {
   opacity: 50%;
 }
 
-.mesto__like.active {
+.mesto__like:active {
   background: url("../../../images/color-black.png");
 }

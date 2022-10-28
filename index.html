@@ -21,59 +21,61 @@
           <img class="profile__avatar" src="./images/avatar.png" alt="Аватар" />
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="profile__button">
+            <button type="button" class="profile__button">
               <img class="profile__pencil" src="./images/pencil.svg" alt="карандаш" />
             </button>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
         </div>
-        <button class="button">
+        <button type="button" class="button">
           <img class="profile__plus" src="./images/plus.svg" alt="добавить" />
         </button>
       </section>
       <section class="mesto">
-        <div class="mesto__element">
-          <img class="mesto__img" src="./images/karachayevsk.png" alt="Карачаевск" />
-          <div class="reaction">
-            <h2 class="mesto__title">Карачаевск</h2>
-            <button class="mesto__like"></button>
-          </div>
-        </div>
-        <div class="mesto__element">
-          <img class="mesto__img" src="./images/elbrus.png" alt="Эльбрус" />
-          <div class="reaction">
-            <h2 class="mesto__title">Гора Эльбрус</h2>
-            <button class="mesto__like"></button>
-          </div>
-        </div>
-        <div class="mesto__element">
-          <img class="mesto__img" src="./images/Dombay.png" alt="Домбай" />
-          <div class="reaction">
-            <h2 class="mesto__title">Домбай</h2>
-            <button class="mesto__like"></button>
-          </div>
-        </div>
-        <div class="mesto__element">
-          <img class="mesto__img" src="./images/karachayevsk.png" alt="Карачаевск" />
-          <div class="reaction">
-            <h2 class="mesto__title">Карачаевск</h2>
-            <button class="mesto__like"></button>
-          </div>
-        </div>
-        <div class="mesto__element">
-          <img class="mesto__img" src="./images/elbrus.png" alt="Эльбрус" />
-          <div class="reaction">
-            <h2 class="mesto__title">Гора Эльбрус</h2>
-            <button class="mesto__like"></button>
-          </div>
-        </div>
-        <div class="mesto__element">
-          <img class="mesto__img" src="./images/Dombay.png" alt="Домбай" />
-          <div class="reaction">
-            <h2 class="mesto__title">Домбай</h2>
-            <button class="mesto__like"></button>
-          </div>
-        </div>
+        <ul class="mesto__ul">
+          <li class="mesto__element">
+            <img class="mesto__img" src="./images/karachayevsk.png" alt="Карачаевск" />
+            <div class="reaction">
+              <h2 class="mesto__title">Карачаевск</h2>
+              <button type="button" class="mesto__like"></button>
+            </div>
+          </li>
+          <li class="mesto__element">
+            <img class="mesto__img" src="./images/elbrus.png" alt="Эльбрус" />
+            <div class="reaction">
+              <h2 class="mesto__title">Гора Эльбрус</h2>
+              <button type="button" class="mesto__like"></button>
+            </div>
+          </li>
+          <li class="mesto__element">
+            <img class="mesto__img" src="./images/Dombay.png" alt="Домбай" />
+            <div class="reaction">
+              <h2 class="mesto__title">Домбай</h2>
+              <button type="button" class="mesto__like"></button>
+            </div>
+          </li>
+          <li class="mesto__element">
+            <img class="mesto__img" src="./images/karachayevsk.png" alt="Карачаевск" />
+            <div class="reaction">
+              <h2 class="mesto__title">Карачаевск</h2>
+              <button type="button" class="mesto__like"></button>
+            </div>
+          </li>
+          <li class="mesto__element">
+            <img class="mesto__img" src="./images/elbrus.png" alt="Эльбрус" />
+            <div class="reaction">
+              <h2 class="mesto__title">Гора Эльбрус</h2>
+              <button type="button" class="mesto__like"></button>
+            </div>
+          </li>
+          <li class="mesto__element">
+            <img class="mesto__img" src="./images/Dombay.png" alt="Домбай" />
+            <div class="reaction">
+              <h2 class="mesto__title">Домбай</h2>
+              <button type="button" class="mesto__like"></button>
+            </div>
+          </li>
+        </ul>
       </section>
     </main>
     <footer class="footer">
@@ -81,12 +83,14 @@
     </footer>
 
     <div class="popup">
-      <img class="popup__close" src="./images/Close.png" alt="Закрыть">
       <div class="popup__container">
-        <h1 class="popup__title">Редактировать профиль</h1>
-        <form class="popup__form">
-          <input type="text" class="popup__text popup__name" placeholder="Жак-Ив Кусто">
-          <input type="text" class="popup__text popup__job" placeholder="Исследователь океана">
+        <button type="button" class="popup__close">
+          <img class="popup__img" src="./images/Close.png" alt="Закрыть">
+        </button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form name="popup__form" class="popup__form">
+          <input type="text" name="popup__name" class="popup__text popup__name" placeholder="Жак-Ив Кусто">
+          <input type="text" name="popup__job" class="popup__text popup__job" placeholder="Исследователь океана">
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
       </div>

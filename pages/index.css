@@ -14,21 +14,23 @@
 
 @import url("../blocks/main/main.css");
 
-@import url("../blocks/mesto/mesto.css");
 @import url("../blocks/mesto/__element/mesto__element.css");
 @import url("../blocks/mesto/__img/mesto__img.css");
 @import url("../blocks/mesto/__like/mesto__like.css");
 @import url("../blocks/mesto/__title/mesto__title.css");
+@import url("../blocks/mesto/__ul/mesto__ul.css");
 
 @import url("../blocks/page/page.css");
 
 @import url("../blocks/popup/popup.css");
+@import url("../blocks/popup/__img/popup__img.css");
 @import url("../blocks/popup/__button/popup__button.css");
 @import url("../blocks/popup/__close/popup__close.css");
 @import url("../blocks/popup/__container/popup__container.css");
 @import url("../blocks/popup/__form/popup__form.css");
 @import url("../blocks/popup/__text/popup__text.css");
 @import url("../blocks/popup/__title/popup__title.css");
+@import url("../blocks/popup/__menu/popup__menu.css");
 
 @import url("../blocks/profile/profile.css");
 @import url("../blocks/profile/__avatar/profile__avatar.css");

@@ -1,7 +1,17 @@
 .reaction {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   margin: 0;
   padding-bottom: 31px;
-  align-items: baseline;
+  align-items: center;
+  margin-left: 21px;
+  margin-right: 15px;
+}
+
+@media screen and (min-width: 1280px) {
+  .reaction {
+    margin-left: 21px;
+    margin-right: 15px;
+  }
+
 }

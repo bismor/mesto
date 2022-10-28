@@ -1,6 +1,7 @@
 .profile__plus {
   max-width: 5.8%;
   object-fit: contain;
+  min-width: 16px;
 }
 
 @media screen and (min-width: 1280px) {

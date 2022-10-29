@@ -1,4 +1,5 @@
 .profile__subtitle {
+  max-width: 282px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -13,6 +14,7 @@
 
 @media screen and (min-width: 1280px) {
   .profile__subtitle {
+    max-width: 336px;
     text-align: left;
     font-size: 18px;
     line-height: 21.78px;

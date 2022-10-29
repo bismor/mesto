@@ -1,4 +1,5 @@
 .mesto__title {
+  max-width: 224px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

@@ -14,17 +14,32 @@ function formSubmitHandler(evt) {
 
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  clickclosePopup()
+  clickClosePopup()
 };
 
 function clickOpenPopup () {
   popup.classList.add('active');
+  let nameTitle = profileName.textContent
+  let jobTitle = profileJob.textContent
+
+  nameInput.value = nameTitle
+  jobInput.value = jobTitle
+  document.addEventListener('keydown', keyClosePopup);
 };
 
-function clickclosePopup () {
+function clickClosePopup () {
   popup.classList.remove('active');
+  nameInput.value = ''
+  jobInput.value = ''
+  document.removeEventListener('keydown', keyClosePopup)
 };
 
-closePopup.addEventListener('click',clickclosePopup);
-openPopup.addEventListener('click', clickOpenPopup);
+function keyClosePopup (event) {
+  if  (event.code == 'Escape') {
+    clickClosePopup()
+  }
+}
 
+
+closePopup.addEventListener('click',clickClosePopup);
+openPopup.addEventListener('click', clickOpenPopup);

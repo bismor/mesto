@@ -10,10 +10,13 @@
   text-align: center;
   margin: 0;
   grid-area: c;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media screen and (min-width: 1280px) {
   .profile__subtitle {
+    margin: 0;
     max-width: 336px;
     text-align: left;
     font-size: 18px;

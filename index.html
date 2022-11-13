@@ -33,48 +33,7 @@
       </section>
       <section class="mesto">
         <ul class="mesto__ul">
-          <li class="mesto__element">
-            <img class="mesto__img" src="./images/karachayevsk.png" alt="Карачаевск" />
-            <div class="reaction">
-              <h2 class="mesto__title">Карачаевск</h2>
-              <button type="button" class="mesto__like"></button>
-            </div>
-          </li>
-          <li class="mesto__element">
-            <img class="mesto__img" src="./images/elbrus.png" alt="Эльбрус" />
-            <div class="reaction">
-              <h2 class="mesto__title">Гора Эльбрус</h2>
-              <button type="button" class="mesto__like"></button>
-            </div>
-          </li>
-          <li class="mesto__element">
-            <img class="mesto__img" src="./images/Dombay.png" alt="Домбай" />
-            <div class="reaction">
-              <h2 class="mesto__title">Домбай</h2>
-              <button type="button" class="mesto__like"></button>
-            </div>
-          </li>
-          <li class="mesto__element">
-            <img class="mesto__img" src="./images/karachayevsk.png" alt="Карачаевск" />
-            <div class="reaction">
-              <h2 class="mesto__title">Карачаевск</h2>
-              <button type="button" class="mesto__like"></button>
-            </div>
-          </li>
-          <li class="mesto__element">
-            <img class="mesto__img" src="./images/elbrus.png" alt="Эльбрус" />
-            <div class="reaction">
-              <h2 class="mesto__title">Гора Эльбрус</h2>
-              <button type="button" class="mesto__like"></button>
-            </div>
-          </li>
-          <li class="mesto__element">
-            <img class="mesto__img" src="./images/Dombay.png" alt="Домбай" />
-            <div class="reaction">
-              <h2 class="mesto__title">Домбай</h2>
-              <button type="button" class="mesto__like"></button>
-            </div>
-          </li>
+
         </ul>
       </section>
     </main>
@@ -83,7 +42,7 @@
     </footer>
 
     <div class="popup">
-      <div class="popup__container">
+      <div id="profile" class="popup__container">
         <button type="button" class="popup__close">
           <img class="popup__img" src="./images/Close.png" alt="Закрыть">
         </button>
@@ -94,10 +53,33 @@
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
       </div>
+      <div id="addcards" class="popup__container">
+        <button type="button" class="popup__close">
+          <img class="popup__img" src="./images/Close.png" alt="Закрыть">
+        </button>
+        <h2 class="popup__title">Новое место</h2>
+        <form name="popup__form" class="popup__form">
+          <input type="text" name="popup__name" class="popup__text popup__name" placeholder="Название">
+          <input type="text" name="popup__job" class="popup__text popup__job" placeholder="Ссылка на картинку">
+          <button type="submit" class="popup__button">Сохранить</button>
+        </form>
+      </div>
     </div>
   </div>
 
-  <script src="./script/script.js"></script>
+  <template class="mesto__template">
+    <li class="mesto__element">
+      <button type="button" class="mesto__delete"></button>
+      <img class="mesto__img" src="" alt="" />
+      <div class="reaction">
+        <h2 class="mesto__title"></h2>
+        <button type="button" class="mesto__like"></button>
+      </div>
+    </li>
+  </template>
+
+
+  <script defer src="./script/script.js"></script>
 </body>
 
 </html>

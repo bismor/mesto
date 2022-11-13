@@ -29,15 +29,15 @@ function clickOpenPopup (element) {
     nameInput.value = nameTitle
     jobInput.value = jobTitle
     document.addEventListener('keydown', keyClosePopup);
-    element = document.querySelector('#profile')
-    setEventListenerPopup(element)
+    let evt = document.querySelector('#profile')
+    setEventListenerPopup(evt)
   } else {
     popup.classList.add('active');
     let popupContainerID = document.getElementById('addcards')
     popupContainerID.style.display = 'flex';
     document.addEventListener('keydown', keyClosePopup);
-    element = document.querySelector('#addcards')
-    setEventListenerPopup(element)
+    let evt = document.querySelector('#addcards')
+    setEventListenerPopup(evt)
   }
 };
 
@@ -56,24 +56,27 @@ const addcardsPopup = (evt) => {
   clickClosePopup()
 }
 
-const setEventListenerPopup = (element) => {
-  let closePopup = element.querySelector('.popup__close')
+const setEventListenerPopup = (evt) => {
+  let closePopup = evt.querySelector('.popup__close')
   closePopup.addEventListener('click',clickClosePopup);
-  let popupContainer = element.querySelector('.popup__button')
+
+  let popupContainer = evt.querySelector('.popup__button')
   let target = popupContainer.id
   if (target == 'saveprofile') {
-    let formElement = element.querySelector('.popup__form');
+    let formElement = evt.querySelector('.popup__form');
     formElement.addEventListener('submit', formSubmitHandler);
   } else {
-    let formElement = element.querySelector('.popup__form');
+    let formElement = evt.querySelector('.popup__form');
     formElement.addEventListener('submit', addcardsPopup);
   }
 }
 
 
-function clickClosePopup () {
+function clickClosePopup (element) {
+  target = element.target
+  let popupContainer = target.closest('.popup__container')
   popup.classList.remove('active');
-  popupContainer.display = 'none';
+  popupContainer.style.display = 'none';
   nameInput.value = ''
   jobInput.value = ''
   document.removeEventListener('keydown', keyClosePopup)

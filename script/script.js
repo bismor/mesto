@@ -3,15 +3,12 @@ let popup = document.querySelector('.popup');
 let closePopup = popup.querySelector('.popup__close');
 let profileName = document.querySelector('.profile__title');
 let profileJob = document.querySelector('.profile__subtitle');
-let formElement = popup.querySelector('.popup__form');
 let nameInput = popup.querySelector('.popup__name');
 let jobInput = popup.querySelector('.popup__job');
 const mestoTemplate = document.querySelector('.mesto__template').content;
 const mestoUl = document.querySelector('.mesto__ul');
-const popupContainer = popup.querySelector('.popup__container');
+let popupContainer = popup.querySelector('.popup__container');
 const buttonAddCardPopup = document.querySelector('.button')
-
-formElement.addEventListener('submit', formSubmitHandler);
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
@@ -21,29 +18,60 @@ function formSubmitHandler(evt) {
   clickClosePopup()
 };
 
-function clickOpenPopup () {
+function clickOpenPopup (element) {
+  const target = element.target
   popup.classList.add('active');
-  let nameTitle = profileName.textContent
-  let jobTitle = profileJob.textContent
-  let containerID = document.getElementById('profile')
-  containerID.style.display = 'flex';
-
-  nameInput.value = nameTitle
-  jobInput.value = jobTitle
-  document.addEventListener('keydown', keyClosePopup);
+  if (target.classList == 'profile__pencil') {
+    let nameTitle = profileName.textContent
+    let jobTitle = profileJob.textContent
+    let popupContainerID = document.getElementById('profile')
+    popupContainerID.style.display = 'flex';
+    nameInput.value = nameTitle
+    jobInput.value = jobTitle
+    document.addEventListener('keydown', keyClosePopup);
+    element = document.querySelector('#profile')
+    setEventListenerPopup(element)
+  } else {
+    popup.classList.add('active');
+    let popupContainerID = document.getElementById('addcards')
+    popupContainerID.style.display = 'flex';
+    document.addEventListener('keydown', keyClosePopup);
+    element = document.querySelector('#addcards')
+    setEventListenerPopup(element)
+  }
 };
 
-function clickOpenaddCardPopup () {
-  popup.classList.add('active');
-  let containerID = document.getElementById('addcards')
-  containerID.style.display = 'flex';
-  console.log(popup)
-  document.addEventListener('keydown', keyClosePopup);
+const addcardsPopup = (evt) => {
+  evt.preventDefault();
+  const mestoElement = mestoTemplate.cloneNode(true);
+  const mestoImage = mestoElement.querySelector('.mesto__img')
+  target = evt.target
+  const nameValue = target.querySelector('.popup__name');
+  const pictureValue = target.querySelector('.popup__job');
+  mestoImage.alt = nameValue.value
+  mestoImage.src = pictureValue.value
+  mestoElement.querySelector('.mesto__title').textContent = nameValue.value;
+  setEventListener(mestoElement)
+  mestoUl.prepend(mestoElement)
+  clickClosePopup()
 }
 
-function clickClosePopup (evt) {
-  target = evt.target
-  console.log(target)
+const setEventListenerPopup = (element) => {
+  let closePopup = element.querySelector('.popup__close')
+  closePopup.addEventListener('click',clickClosePopup);
+  let popupContainer = element.querySelector('.popup__button')
+  let target = popupContainer.id
+  if (target == 'saveprofile') {
+    let formElement = element.querySelector('.popup__form');
+    formElement.addEventListener('submit', formSubmitHandler);
+  } else {
+    let formElement = element.querySelector('.popup__form');
+    formElement.addEventListener('submit', addcardsPopup);
+  }
+}
+
+
+function clickClosePopup () {
   popup.classList.remove('active');
   popupContainer.display = 'none';
   nameInput.value = ''
@@ -57,9 +85,8 @@ function keyClosePopup (event) {
   }
 }
 
-closePopup.addEventListener('click',clickClosePopup);
 openPopup.addEventListener('click', clickOpenPopup);
-buttonAddCardPopup.addEventListener('click',clickOpenaddCardPopup);
+buttonAddCardPopup.addEventListener('click',clickOpenPopup);
 
 const initialCards = [
   {

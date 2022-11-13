@@ -64,13 +64,20 @@
           <button type="submit" id="addpicture" class="popup__button">Сохранить</button>
         </form>
       </div>
+      <div class="popup__picture">
+        <button type="button" class="popup__close">
+          <img class="popup__img" src="./images/Close.png" alt="Закрыть">
+        </button>
+        <img class="popup__screen" src="" alt="" />
+        <h2 class="picture__name"></h2>
+      </div>
     </div>
   </div>
 
   <template class="mesto__template">
     <li class="mesto__element">
       <button type="button" class="mesto__delete"></button>
-      <img class="mesto__img" src="" alt="" />
+      <img class="mesto__img" type="button" src="" alt="" />
       <div class="reaction">
         <h2 class="mesto__title"></h2>
         <button type="button" class="mesto__like"></button>

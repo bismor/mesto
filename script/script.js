@@ -10,6 +10,7 @@ const mestoUl = document.querySelector('.mesto__ul');
 let popupContainer = popup.querySelector('.popup__container');
 const buttonAddCardPopup = document.querySelector('.button')
 
+
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
@@ -17,6 +18,7 @@ function formSubmitHandler(evt) {
   profileJob.textContent = jobInput.value;
   clickClosePopup()
 };
+
 
 function clickOpenPopup (element) {
   const target = element.target
@@ -35,6 +37,7 @@ function clickOpenPopup (element) {
     popup.classList.add('active');
     let popupContainerID = document.getElementById('addcards')
     popupContainerID.style.display = 'flex';
+    popupContainerID.style.alignItems = 'flex-start';
     document.addEventListener('keydown', keyClosePopup);
     let evt = document.querySelector('#addcards')
     setEventListenerPopup(evt)
@@ -134,12 +137,29 @@ const removeLike = (evt) => {
   }
 }
 
+const openPicture = (evt) => {
+  const target = evt.target
+  console.log('картинка')
+  console.log(target.alt)
+  popup.classList.add('active');
+  let popupPictCont = document.querySelector('.popup__picture')
+  let pictureName = popupPictCont.querySelector('.picture__name')
+  let popupScreen = popupPictCont.querySelector('.popup__screen')
+  console.log(pictureName)
+  popupPictCont.style.display = 'flex';
+  pictureName.textContent = target.alt;
+  popupScreen.src = target.src
+}
+
 const setEventListener = (mestoElement) => {
   const el = mestoElement.querySelector('.mesto__delete')
   el.addEventListener('click',deleteHandlerPost)
 
   const like = mestoElement.querySelector('.mesto__like')
   like.addEventListener('click', removeLike)
+
+  const picture = mestoElement.querySelector('.mesto__img')
+  picture.addEventListener('click', openPicture)
 }
 
 initialCards.forEach(element => {

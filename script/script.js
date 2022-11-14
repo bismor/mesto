@@ -5,11 +5,37 @@ let profileName = document.querySelector('.profile__title');
 let profileJob = document.querySelector('.profile__subtitle');
 let nameInput = popup.querySelector('.popup__name');
 let jobInput = popup.querySelector('.popup__job');
-const mestoTemplate = document.querySelector('.mesto__template').content;
-const mestoUl = document.querySelector('.mesto__ul');
+let mestoTemplate = document.querySelector('.mesto__template').content;
+let mestoUl = document.querySelector('.mesto__ul');
 let popupContainer = popup.querySelector('.popup__container');
-const buttonAddCardPopup = document.querySelector('.button')
+let buttonAddCardPopup = document.querySelector('.button')
 
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  },
+];
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
@@ -19,8 +45,7 @@ function formSubmitHandler(evt) {
   clickClosePopup(evt)
 };
 
-
-function clickOpenPopup (element) {
+function clickOpenPopup(element) {
   const target = element.target
   popup.classList.add('active');
   if (target.classList == 'profile__pencil') {
@@ -61,7 +86,7 @@ const addcardsPopup = (evt) => {
 
 const setEventListenerPopup = (evt) => {
   let closePopup = evt.querySelector('.popup__close')
-  closePopup.addEventListener('click',clickClosePopup);
+  closePopup.addEventListener('click', clickClosePopup);
   let popupContainer = evt.querySelector('.popup__button')
   let target = popupContainer.id
   if (target == 'saveprofile') {
@@ -73,58 +98,25 @@ const setEventListenerPopup = (evt) => {
   }
 }
 
-
-function clickClosePopup (element) {
+function clickClosePopup(element) {
   target = element.target
   popup.classList.remove('active');
   if (target.id == "closepict") {
     let popupContainer = target.closest('.popup__picture')
     popupContainer.style.display = 'none';
     document.removeEventListener('keydown', keyClosePopup)
-  } else
-  {
+  } else {
     let popupContainer = target.closest('.popup__container')
     popupContainer.style.display = 'none';
     document.removeEventListener('keydown', keyClosePopup)
   }
 };
 
-function keyClosePopup (event) {
-  if  (event.code == 'Escape') {
+function keyClosePopup(event) {
+  if (event.code == 'Escape') {
     clickClosePopup()
   }
 }
-
-openPopup.addEventListener('click', clickOpenPopup);
-buttonAddCardPopup.addEventListener('click',clickOpenPopup);
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  },
-];
-
 
 const deleteHandlerPost = (evt) => {
   const target = evt.target
@@ -157,7 +149,7 @@ const openPicture = (evt) => {
 
 const setEventListener = (mestoElement) => {
   const el = mestoElement.querySelector('.mesto__delete')
-  el.addEventListener('click',deleteHandlerPost)
+  el.addEventListener('click', deleteHandlerPost)
 
   const like = mestoElement.querySelector('.mesto__like')
   like.addEventListener('click', removeLike)
@@ -176,6 +168,7 @@ initialCards.forEach(element => {
   mestoUl.append(mestoElement)
 })
 
-
+openPopup.addEventListener('click', clickOpenPopup);
+buttonAddCardPopup.addEventListener('click', clickOpenPopup);
 
 

@@ -8,14 +8,13 @@
   display: flex;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s, opacity 0.5s linear;
+  transition: visibility 0.5s, opacity 0.5s linear;
 }
 
 .popup.active {
   align-content: center;
   justify-content: center;
   align-items: center;
-  transition: 0.5s all;
   visibility: visible;
   opacity: 1;
 }

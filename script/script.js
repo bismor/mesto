@@ -16,7 +16,7 @@ function formSubmitHandler(evt) {
 
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  clickClosePopup()
+  clickClosePopup(evt)
 };
 
 
@@ -56,13 +56,12 @@ const addcardsPopup = (evt) => {
   mestoElement.querySelector('.mesto__title').textContent = nameValue.value;
   setEventListener(mestoElement)
   mestoUl.prepend(mestoElement)
-  clickClosePopup()
+  clickClosePopup(evt)
 }
 
 const setEventListenerPopup = (evt) => {
   let closePopup = evt.querySelector('.popup__close')
   closePopup.addEventListener('click',clickClosePopup);
-
   let popupContainer = evt.querySelector('.popup__button')
   let target = popupContainer.id
   if (target == 'saveprofile') {
@@ -77,12 +76,17 @@ const setEventListenerPopup = (evt) => {
 
 function clickClosePopup (element) {
   target = element.target
-  let popupContainer = target.closest('.popup__container')
   popup.classList.remove('active');
-  popupContainer.style.display = 'none';
-  nameInput.value = ''
-  jobInput.value = ''
-  document.removeEventListener('keydown', keyClosePopup)
+  if (target.id == "closepict") {
+    let popupContainer = target.closest('.popup__picture')
+    popupContainer.style.display = 'none';
+    document.removeEventListener('keydown', keyClosePopup)
+  } else
+  {
+    let popupContainer = target.closest('.popup__container')
+    popupContainer.style.display = 'none';
+    document.removeEventListener('keydown', keyClosePopup)
+  }
 };
 
 function keyClosePopup (event) {
@@ -139,16 +143,16 @@ const removeLike = (evt) => {
 
 const openPicture = (evt) => {
   const target = evt.target
-  console.log('картинка')
-  console.log(target.alt)
   popup.classList.add('active');
   let popupPictCont = document.querySelector('.popup__picture')
   let pictureName = popupPictCont.querySelector('.picture__name')
   let popupScreen = popupPictCont.querySelector('.popup__screen')
-  console.log(pictureName)
   popupPictCont.style.display = 'flex';
   pictureName.textContent = target.alt;
   popupScreen.src = target.src
+
+  let closePopupPict = popupPictCont.querySelector('.popup__close')
+  closePopupPict.addEventListener('click', clickClosePopup)
 }
 
 const setEventListener = (mestoElement) => {

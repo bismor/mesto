@@ -5,14 +5,17 @@
   height: 100vh;
   top: 0;
   left: 0;
-  display: none;
-  transition: 0.5s all;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
 }
 
 .popup.active {
-  display: flex;
   align-content: center;
   justify-content: center;
   align-items: center;
   transition: 0.5s all;
+  visibility: visible;
+  opacity: 1;
 }

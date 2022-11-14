@@ -137,7 +137,7 @@ const openPicture = (evt) => {
   const target = evt.target
   popup.classList.add('active');
   let popupPictCont = document.querySelector('.popup__picture')
-  let pictureName = popupPictCont.querySelector('.picture__name')
+  let pictureName = popupPictCont.querySelector('.popup__picture_name')
   let popupScreen = popupPictCont.querySelector('.popup__screen')
   popupPictCont.style.display = 'flex';
   pictureName.textContent = target.alt;

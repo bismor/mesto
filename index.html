@@ -41,8 +41,8 @@
       <h3 class="footer__text">© 2020 Mesto Russia</h3>
     </footer>
 
-    <div class="popup">
-      <div id="profile" class="popup__container">
+    <div class="popup profilePopup">
+      <div class="popup__container">
         <button type="button" class="popup__close">
           <img class="popup__img" src="./images/Close.png" alt="Закрыть">
         </button>
@@ -53,7 +53,10 @@
           <button type="submit" id="saveprofile" class="popup__button">Сохранить</button>
         </form>
       </div>
-      <div id="addcards" class="popup__container">
+    </div>
+
+    <div class="popup cardPopup">
+      <div class="popup__container">
         <button type="button" class="popup__close">
           <img class="popup__img" src="./images/Close.png" alt="Закрыть">
         </button>
@@ -64,6 +67,9 @@
           <button type="submit" id="addpicture" class="popup__button">Сохранить</button>
         </form>
       </div>
+    </div>
+
+    <div class="popup imagePopup">
       <div class="popup__picture">
         <button type="button" class="popup__close">
           <img class="popup__img" id="closepict" src="./images/Close.png" alt="Закрыть">
@@ -85,7 +91,7 @@
     </li>
   </template>
 
-  <script defer src="./script/script.js"></script>
+  <script defer src="./script/newscript.js"></script>
 </body>
 
 </html>

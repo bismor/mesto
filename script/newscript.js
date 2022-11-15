@@ -29,11 +29,10 @@ const buttonProfilePopup = document.querySelector('.profile__pencil')
 const popup = document.querySelector('.popup');
 let mestoTemplate = document.querySelector('.mesto__template').content;
 let mestoUl = document.querySelector('.mesto__ul');
-
-
-function openPopup (popup) {
-  popup.classList.add('_active');
-}
+const cardPopup = document.querySelector('.cardPopup')
+const profilePopup = document.querySelector('.profilePopup')
+const buttonProfileOpenPopup = document.querySelector('.profile__button')
+const buttonOpenCreateCardPopup = document.querySelector('.button')
 
 initialCards.forEach(element => {
   let mestoElement = createCard(element)
@@ -95,3 +94,42 @@ function closePopup (element) {
   let targetPopup = target.closest('.popup')
   targetPopup.classList.remove('popup_opened');
 }
+
+function formSubmitHandlerProfile(evt) {
+  evt.preventDefault();
+  target = evt.target
+  let profileName = document.querySelector('.profile__title');
+  let profileJob = document.querySelector('.profile__subtitle');
+  let nameInput = target.querySelector('.popup__name')
+  let jobInput = target.querySelector('.popup__job')
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  closePopup(evt)
+};
+
+function openPopupProfile () {
+  profilePopup.classList.add('popup_opened');
+  setEventListenerProfile ()
+
+}
+
+function setEventListenerProfile () {
+  const closePopupProfile = profilePopup.querySelector('.popup__close')
+  closePopupProfile.addEventListener('click', closePopup)
+  let formElement = profilePopup.querySelector('.popup__form');
+  formElement.addEventListener('submit', formSubmitHandlerProfile);
+}
+
+function openPopupcreateCard () {
+  cardPopup.classList.add('popup_opened')
+  setEventListenerCreatecard ()
+}
+
+function setEventListenerCreatecard () {
+  const closePopupcreateCard = cardPopup.querySelector('.popup__close')
+  closePopupcreateCard.addEventListener('click', closePopup)
+
+}
+
+buttonProfileOpenPopup.addEventListener('click', openPopupProfile);
+buttonOpenCreateCardPopup.addEventListener('click', openPopupcreateCard);

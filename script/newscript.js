@@ -78,7 +78,7 @@ function removeLike (evt) {
 function openPicture (evt)  {
   const target = evt.target
   popupOpenPict = document.querySelector('.imagePopup')
-  popupOpenPict.classList.add('popup_opened');
+  openPopup(popupOpenPict)
   let popupPictCont = document.querySelector('.popup__picture')
   let pictureName = popupPictCont.querySelector('.popup__subname')
   let popupScreen = popupPictCont.querySelector('.popup__screen')
@@ -108,7 +108,7 @@ function formSubmitHandlerProfile(evt) {
 };
 
 function openPopupProfile () {
-  profilePopup.classList.add('popup_opened');
+  openPopup(profilePopup)
   setEventListenerProfile ()
 }
 
@@ -120,8 +120,12 @@ function setEventListenerProfile () {
 }
 
 function openPopupcreateCard () {
-  cardPopup.classList.add('popup_opened')
+  openPopup(cardPopup)
   setEventListenerCreatecard ()
+}
+
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
 }
 
 function setEventListenerCreatecard () {

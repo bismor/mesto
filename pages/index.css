@@ -42,6 +42,7 @@
 @import url("../blocks/profile/__subtitle/profile__subtitle.css");
 @import url("../blocks/profile/__title/profile__title.css");
 @import url("../blocks/profile/__pencil/profile__pencil.css");
+@import url("../blocks/popup/__contcard/popup__contcard.css");
 
 
 @import url("../blocks/reaction/reaction.css");

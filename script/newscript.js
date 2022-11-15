@@ -86,6 +86,12 @@ function openPicture (evt)  {
   pictureName.textContent = target.alt;
   popupScreen.src = target.src
 
-  // let closePopupPict = popupPictCont.querySelector('.popup__close')
-  // closePopupPict.addEventListener('click', clickClosePopup)
+  let closePopupPict = popupOpenPict.querySelector('.popup__close')
+  closePopupPict.addEventListener('click', closePopup)
+}
+
+function closePopup (element) {
+  let target = element.target
+  let targetPopup = target.closest('.popup')
+  targetPopup.classList.remove('popup_opened');
 }

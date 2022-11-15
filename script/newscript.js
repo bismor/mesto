@@ -110,7 +110,6 @@ function formSubmitHandlerProfile(evt) {
 function openPopupProfile () {
   profilePopup.classList.add('popup_opened');
   setEventListenerProfile ()
-
 }
 
 function setEventListenerProfile () {
@@ -128,7 +127,23 @@ function openPopupcreateCard () {
 function setEventListenerCreatecard () {
   const closePopupcreateCard = cardPopup.querySelector('.popup__close')
   closePopupcreateCard.addEventListener('click', closePopup)
+  let formElement = cardPopup.querySelector('.popup__form');
+  formElement.addEventListener('submit', formSubmitHandlerAddCard);
+}
 
+function formSubmitHandlerAddCard(evt) {
+  evt.preventDefault();
+  const mestoElement = mestoTemplate.cloneNode(true);
+  const mestoImage = mestoElement.querySelector('.mesto__img')
+  target = evt.target
+  const nameValue = target.querySelector('.popup__name');
+  const pictureValue = target.querySelector('.popup__job');
+  mestoImage.alt = nameValue.value
+  mestoImage.src = pictureValue.value
+  mestoElement.querySelector('.mesto__title').textContent = nameValue.value;
+  setEventListener(mestoElement)
+  mestoUl.prepend(mestoElement)
+  closePopup(evt)
 }
 
 buttonProfileOpenPopup.addEventListener('click', openPopupProfile);

@@ -26,13 +26,18 @@ const initialCards = [
 ];
 
 const buttonProfilePopup = document.querySelector('.profile__pencil')
-const popup = document.querySelector('.popup');
 const mestoTemplate = document.querySelector('.mesto__template').content;
 const mestoUl = document.querySelector('.mesto__ul');
 const cardPopup = document.querySelector('.cardPopup')
 const profilePopup = document.querySelector('.profilePopup')
 const buttonProfileOpenPopup = document.querySelector('.profile__button')
 const buttonOpenCreateCardPopup = document.querySelector('.button')
+const profileName = document.querySelector('.profile__title');
+const profileJob = document.querySelector('.profile__subtitle');
+const popupOpenPict = document.querySelector('.imagePopup')
+const popupPictCont = document.querySelector('.popup__picture')
+const pictureName = popupPictCont.querySelector('.popup__subname')
+const popupScreen = popupPictCont.querySelector('.popup__screen')
 
 initialCards.forEach(element => {
   const mestoElement = createCard(element)
@@ -51,60 +56,55 @@ function createCard(item) {
 
 function setEventListener(evt) {
   const el = evt.querySelector('.mesto__delete')
-  el.addEventListener('click', deleteHandlerPost)
+  el.addEventListener('click', handlePostDelete)
 
   const like = evt.querySelector('.mesto__like')
-  like.addEventListener('click', removeLike)
+  like.addEventListener('click', toggleLike)
 
   const picture = evt.querySelector('.mesto__img')
   picture.addEventListener('click', openPicture)
 }
 
-function deleteHandlerPost(evt) {
+function handlePostDelete(evt) {
   const target = evt.target
   const currentСard = target.closest('.mesto__element')
   currentСard.remove()
 }
 
-function removeLike(evt) {
+function toggleLike(evt) {
   const target = evt.target
-  if (target.classList.contains("mesto__like")) {
-    target.classList.toggle("mesto__like-active")
-  } else {
-    target.classList.toggle("mesto__like")
-  }
+  target.classList.toggle("mesto__like-active")
 }
 
 function openPicture(evt) {
   const target = evt.target
-  popupOpenPict = document.querySelector('.imagePopup')
   openPopup(popupOpenPict)
-  const popupPictCont = document.querySelector('.popup__picture')
-  const pictureName = popupPictCont.querySelector('.popup__subname')
-  const popupScreen = popupPictCont.querySelector('.popup__screen')
   pictureName.textContent = target.alt;
   popupScreen.src = target.src
-
+  popupScreen.alt = target.alt
   const closePopupPict = popupOpenPict.querySelector('.popup__close')
-  closePopupPict.addEventListener('click', closePopup)
+  closePopupPict.addEventListener('click', hideClosestPopup)
 }
 
-function closePopup(element) {
-  const target = element.target
-  const targetPopup = target.closest('.popup')
-  targetPopup.classList.remove('popup_opened');
+function hideClosestPopup(element) {
+  const targetPopup = element.target.closest(".popup");
+  if (targetPopup) {  // проверяем, нашелся ли попап
+    closePopup(targetPopup);
+  }
 }
 
-function formSubmitHandlerProfile(evt) {
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+}
+
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  target = evt.target
-  const profileName = document.querySelector('.profile__title');
-  const profileJob = document.querySelector('.profile__subtitle');
+  const target = evt.target
   const nameInput = target.querySelector('.popup__name')
   const jobInput = target.querySelector('.popup__job')
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  closePopup(evt)
+  hideClosestPopup(evt)
 };
 
 function openPopupProfile() {
@@ -114,9 +114,9 @@ function openPopupProfile() {
 
 function setEventListenerProfile() {
   const closePopupProfile = profilePopup.querySelector('.popup__close')
-  closePopupProfile.addEventListener('click', closePopup)
-  const formElement = profilePopup.querySelector('.popup__form');
-  formElement.addEventListener('submit', formSubmitHandlerProfile);
+  closePopupProfile.addEventListener('click', hideClosestPopup)
+  const formElementProfilePopup = profilePopup.querySelector('.popup__form');
+  formElementProfilePopup.addEventListener('submit', handleProfileFormSubmit);
 }
 
 function openPopupcreateCard() {
@@ -130,24 +130,23 @@ function openPopup(popup) {
 
 function setEventListenerCreatecard() {
   const closePopupcreateCard = cardPopup.querySelector('.popup__close')
-  closePopupcreateCard.addEventListener('click', closePopup)
-  const formElement = cardPopup.querySelector('.popup__form');
-  formElement.addEventListener('submit', formSubmitHandlerAddCard);
+  closePopupcreateCard.addEventListener('click', hideClosestPopup)
+  const formElementCardPopup = cardPopup.querySelector('.popup__form');
+  formElementCardPopup.addEventListener('submit',handleAddCardFormSubmit);
 }
 
-function formSubmitHandlerAddCard(evt) {
+function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  const mestoElement = mestoTemplate.cloneNode(true);
-  const mestoImage = mestoElement.querySelector('.mesto__img')
-  target = evt.target
+  const mestoImage = mestoTemplate.querySelector('.mesto__img')
+  const target = evt.target
   const nameValue = target.querySelector('.popup__name');
   const pictureValue = target.querySelector('.popup__job');
   mestoImage.alt = nameValue.value
   mestoImage.src = pictureValue.value
-  mestoElement.querySelector('.mesto__title').textContent = nameValue.value;
-  setEventListener(mestoElement)
-  mestoUl.prepend(mestoElement)
-  closePopup(evt)
+  mestoTemplate.querySelector('.mesto__title').textContent = nameValue.value;
+  setEventListener(mestoTemplate)
+  mestoUl.prepend(mestoTemplate)
+  hideClosestPopup(evt)
 }
 
 buttonProfileOpenPopup.addEventListener('click', openPopupProfile);

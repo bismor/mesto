@@ -110,8 +110,8 @@ function handleProfileFormSubmit(evt) {
 function openPopupProfile() {
   const nameInput = profilePopup.querySelector('.popup__name')
   const jobInput = profilePopup.querySelector('.popup__job')
-  nameInput.textContent = profileName.textContent
-  jobInput.textContent = profileJob.textContent
+  nameInput.value = profileName.textContent
+  jobInput.value = profileJob.textContent
   openPopup(profilePopup)
   setEventListenerProfile()
 }
@@ -124,6 +124,10 @@ function setEventListenerProfile() {
 }
 
 function openPopupcreateCard() {
+  const nameInput = cardPopup.querySelector('.popup__name')
+  const jobInput = cardPopup.querySelector('.popup__job')
+  nameInput.value = ''
+  jobInput.value = ''
   openPopup(cardPopup)
   setEventListenerCreatecard()
 }

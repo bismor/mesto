@@ -38,6 +38,10 @@ const popupOpenPict = document.querySelector('.imagePopup')
 const popupPictCont = document.querySelector('.popup__picture')
 const pictureName = popupPictCont.querySelector('.popup__subname')
 const popupScreen = popupPictCont.querySelector('.popup__screen')
+const closePopupProfile = profilePopup.querySelector('.popup__close')
+const formElementProfilePopup = profilePopup.querySelector('.popup__form');
+const closePopupcreateCard = cardPopup.querySelector('.popup__close')
+const formElementCardPopup = cardPopup.querySelector('.popup__form');
 
 initialCards.forEach(element => {
   const mestoElement = createCard(element)
@@ -88,7 +92,7 @@ function openPicture(evt) {
 
 function hideClosestPopup(element) {
   const targetPopup = element.target.closest(".popup");
-  if (targetPopup) {  // проверяем, нашелся ли попап
+  if (targetPopup) {
     closePopup(targetPopup);
   }
 }
@@ -113,14 +117,6 @@ function openPopupProfile() {
   nameInput.value = profileName.textContent
   jobInput.value = profileJob.textContent
   openPopup(profilePopup)
-  setEventListenerProfile()
-}
-
-function setEventListenerProfile() {
-  const closePopupProfile = profilePopup.querySelector('.popup__close')
-  closePopupProfile.addEventListener('click', hideClosestPopup)
-  const formElementProfilePopup = profilePopup.querySelector('.popup__form');
-  formElementProfilePopup.addEventListener('submit', handleProfileFormSubmit);
 }
 
 function openPopupcreateCard() {
@@ -129,18 +125,10 @@ function openPopupcreateCard() {
   nameInput.value = ''
   jobInput.value = ''
   openPopup(cardPopup)
-  setEventListenerCreatecard()
 }
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-}
-
-function setEventListenerCreatecard() {
-  const closePopupcreateCard = cardPopup.querySelector('.popup__close')
-  closePopupcreateCard.addEventListener('click', hideClosestPopup)
-  const formElementCardPopup = cardPopup.querySelector('.popup__form');
-  formElementCardPopup.addEventListener('submit',handleAddCardFormSubmit);
 }
 
 function handleAddCardFormSubmit(evt) {
@@ -159,3 +147,7 @@ function handleAddCardFormSubmit(evt) {
 
 buttonProfileOpenPopup.addEventListener('click', openPopupProfile);
 buttonOpenCreateCardPopup.addEventListener('click', openPopupcreateCard);
+closePopupProfile.addEventListener('click', hideClosestPopup)
+closePopupcreateCard.addEventListener('click', hideClosestPopup)
+formElementCardPopup.addEventListener('submit', handleAddCardFormSubmit);
+formElementProfilePopup.addEventListener('submit', handleProfileFormSubmit);

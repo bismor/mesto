@@ -108,6 +108,10 @@ function handleProfileFormSubmit(evt) {
 };
 
 function openPopupProfile() {
+  const nameInput = profilePopup.querySelector('.popup__name')
+  const jobInput = profilePopup.querySelector('.popup__job')
+  nameInput.textContent = profileName.textContent
+  jobInput.textContent = profileJob.textContent
   openPopup(profilePopup)
   setEventListenerProfile()
 }

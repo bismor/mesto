@@ -43,6 +43,10 @@ const formElementProfilePopup = profilePopup.querySelector('.popup__form');
 const closePopupcreateCard = cardPopup.querySelector('.popup__close')
 const formElementCardPopup = cardPopup.querySelector('.popup__form');
 const closePopupPict = popupOpenPict.querySelector('.popup__close')
+const nameInput = profilePopup.querySelector('.popup__name')
+const jobInput = profilePopup.querySelector('.popup__job')
+const nameCardValue = cardPopup.querySelector('.popup__name')
+const pictureCardValue = cardPopup.querySelector('.popup__job')
 
 initialCards.forEach(element => {
   const mestoElement = createCard(element)
@@ -112,18 +116,12 @@ function handleProfileFormSubmit(evt) {
 };
 
 function openPopupProfile() {
-  const nameInput = profilePopup.querySelector('.popup__name')
-  const jobInput = profilePopup.querySelector('.popup__job')
   nameInput.value = profileName.textContent
   jobInput.value = profileJob.textContent
   openPopup(profilePopup)
 }
 
 function openPopupcreateCard() {
-  const nameInput = cardPopup.querySelector('.popup__name')
-  const jobInput = cardPopup.querySelector('.popup__job')
-  nameInput.value = ''
-  jobInput.value = ''
   openPopup(cardPopup)
 }
 
@@ -133,15 +131,11 @@ function openPopup(popup) {
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  const mestoImage = mestoTemplate.querySelector('.mesto__img')
-  const target = evt.target
-  const nameValue = target.querySelector('.popup__name');
-  const pictureValue = target.querySelector('.popup__job');
-  mestoImage.alt = nameValue.value
-  mestoImage.src = pictureValue.value
-  mestoTemplate.querySelector('.mesto__title').textContent = nameValue.value;
-  setEventListener(mestoTemplate)
-  mestoUl.prepend(mestoTemplate)
+  const newCard = { name: nameCardValue.value, link: pictureCardValue.value }
+  const mestoElement = createCard(newCard)
+  mestoUl.prepend(mestoElement)
+  nameCardValue.value = ''
+  pictureCardValue.value = ''
   hideClosestPopup(evt)
 }
 

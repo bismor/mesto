@@ -74,8 +74,8 @@ const selectors = {
   inputSelector: '.popup__text',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_inactive',
-  inputErrorClass: '.form__input-error',
+  inputErrorClass: '.popup__input-error',
   errorClass: '.popup__button_inactive',
   popupTextTypeError: 'popup__text-type-error',
-  formInputError: 'form__input-error_active'
+  formInputError: 'popup__input-error_active'
 };

@@ -146,3 +146,6 @@ closePopupcreateCard.addEventListener('click', hideClosestPopup)
 closePopupPict.addEventListener('click', hideClosestPopup)
 formElementCardPopup.addEventListener('submit', handleAddCardFormSubmit);
 formElementProfilePopup.addEventListener('submit', handleProfileFormSubmit);
+
+
+enableValidation(selectors)

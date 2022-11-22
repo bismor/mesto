@@ -48,8 +48,10 @@
         </button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form name="popup__form" class="popup__form">
-          <input type="text" name="popup__name" class="popup__text popup__name" placeholder="Введите имя">
-          <input type="text" name="popup__job" class="popup__text popup__job" placeholder="Введите профессию">
+          <input type="text" name="popup__name" class="popup__text popup__name" placeholder="Введите имя" required minlength="2" maxlength="40">
+          <span class="form__input-error">error name</span>
+          <input type="text" name="popup__job" class="popup__text popup__job" placeholder="Введите профессию" required minlength="2" maxlength="200">
+          <span class="form__input-error">error job</span>
           <button type="submit" id="saveprofile" class="popup__button">Сохранить</button>
         </form>
       </div>
@@ -62,8 +64,10 @@
         </button>
         <h2 class="popup__title">Новое место</h2>
         <form name="popup__form" class="popup__form">
-          <input type="text" name="popup__name" class="popup__text popup__name" placeholder="Название">
-          <input type="text" name="popup__job" class="popup__text popup__job" placeholder="Ссылка на картинку">
+          <input type="text" name="popup__name" class="popup__text popup__name" placeholder="Название" required minlength="2" maxlength="30">
+          <span class="form__input-error">error name</span>
+          <input type="text" name="popup__job" class="popup__text popup__job" placeholder="Ссылка на картинку" required>
+          <span class="form__input-error">error src</span>
           <button type="submit" id="addpicture" class="popup__button">Сохранить</button>
         </form>
       </div>
@@ -94,6 +98,7 @@
   </template>
 
   <script defer src="./script/script.js"></script>
+  <script defer src="./script/validate.js"></script>
 </body>
 
 </html>

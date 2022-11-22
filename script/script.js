@@ -150,8 +150,8 @@ closePopupProfile.addEventListener('click', hideClosestPopup)
 closePopupcreateCard.addEventListener('click', hideClosestPopup)
 closePopupPict.addEventListener('click', hideClosestPopup)
 cardPopupOverlay.addEventListener('click', hideClosestPopup)
-profilePopupOverlay.addEventListener('click', hideClosestPopup)
-imagePopupoverlay.addEventListener('click', hideClosestPopup)
+profilePopupOverlay.addEventListener('click', hideClosestPopupOverlay)
+imagePopupoverlay.addEventListener('click', hideClosestPopupOverlay)
 
 formElementCardPopup.addEventListener('submit', handleAddCardFormSubmit);
 formElementProfilePopup.addEventListener('submit', handleProfileFormSubmit);
@@ -161,5 +161,14 @@ function keyСlosePopup(evt) {
   if (evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened')
     closePopup(popupOpened)
+  }
+}
+
+function hideClosestPopupOverlay(element) {
+  const target = element.target
+  const targetPopup = target.closest(".popup");
+  const popupContainer = targetPopup.querySelector('.popup__container');
+  if (target.contains(popupContainer)) {
+    closePopup(targetPopup);
   }
 }

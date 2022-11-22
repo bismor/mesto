@@ -1,3 +1,5 @@
+enableValidation(selectors)
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -146,6 +148,13 @@ closePopupcreateCard.addEventListener('click', hideClosestPopup)
 closePopupPict.addEventListener('click', hideClosestPopup)
 formElementCardPopup.addEventListener('submit', handleAddCardFormSubmit);
 formElementProfilePopup.addEventListener('submit', handleProfileFormSubmit);
+document.addEventListener('keydown', keyСlosePopup)
+
+function keyСlosePopup(evt) {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened')
+    closePopup(popupOpened)
+  }
+}
 
 
-enableValidation(selectors)

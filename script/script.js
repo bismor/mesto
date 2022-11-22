@@ -49,6 +49,9 @@ const nameInput = profilePopup.querySelector('.popup__name')
 const jobInput = profilePopup.querySelector('.popup__job')
 const nameCardValue = cardPopup.querySelector('.popup__name')
 const pictureCardValue = cardPopup.querySelector('.popup__job')
+const cardPopupOverlay = document.querySelector('.cardPopup')
+const profilePopupOverlay = document.querySelector('.profilePopup')
+const imagePopupoverlay = document.querySelector('.imagePopup')
 
 initialCards.forEach(element => {
   const mestoElement = createCard(element)
@@ -146,6 +149,10 @@ buttonOpenCreateCardPopup.addEventListener('click', openPopupcreateCard);
 closePopupProfile.addEventListener('click', hideClosestPopup)
 closePopupcreateCard.addEventListener('click', hideClosestPopup)
 closePopupPict.addEventListener('click', hideClosestPopup)
+cardPopupOverlay.addEventListener('click', hideClosestPopup)
+profilePopupOverlay.addEventListener('click', hideClosestPopup)
+imagePopupoverlay.addEventListener('click', hideClosestPopup)
+
 formElementCardPopup.addEventListener('submit', handleAddCardFormSubmit);
 formElementProfilePopup.addEventListener('submit', handleProfileFormSubmit);
 document.addEventListener('keydown', keyСlosePopup)
@@ -156,5 +163,3 @@ function keyСlosePopup(evt) {
     closePopup(popupOpened)
   }
 }
-
-

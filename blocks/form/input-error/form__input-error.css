@@ -6,4 +6,9 @@
   line-height: 14.52px;
   vertical-align: Top;
   margin-bottom: 13px;
+  display: none;
+}
+
+.form__input-error_active {
+  display: flex;
 }

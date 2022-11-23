@@ -1,5 +1,3 @@
-enableValidation(selectors)
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -136,11 +134,12 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', keyСlosePopup)
   popup.addEventListener('click', hideClosestPopupOverlay)
+  enableValidation(selectors)
 }
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  const newCard = { name: nameCardValue.value, link: pictureCardValue.value }
+  const newCard = {name: nameCardValue.value, link: pictureCardValue.value}
   const mestoElement = createCard(newCard)
   mestoUl.prepend(mestoElement)
   nameCardValue.value = ''
@@ -153,7 +152,6 @@ buttonOpenCreateCardPopup.addEventListener('click', openPopupcreateCard);
 closePopupProfile.addEventListener('click', hideClosestPopup)
 closePopupcreateCard.addEventListener('click', hideClosestPopup)
 closePopupPict.addEventListener('click', hideClosestPopup)
-
 formElementCardPopup.addEventListener('submit', handleAddCardFormSubmit);
 formElementProfilePopup.addEventListener('submit', handleProfileFormSubmit);
 

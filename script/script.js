@@ -1,3 +1,5 @@
+enableValidation(selectors)
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -134,7 +136,6 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', keyСlosePopup)
   popup.addEventListener('click', hideClosestPopupOverlay)
-  enableValidation(selectors)
 }
 
 function handleAddCardFormSubmit(evt) {
@@ -142,8 +143,7 @@ function handleAddCardFormSubmit(evt) {
   const newCard = {name: nameCardValue.value, link: pictureCardValue.value}
   const mestoElement = createCard(newCard)
   mestoUl.prepend(mestoElement)
-  nameCardValue.value = ''
-  pictureCardValue.value = ''
+  evt.target.reset()
   hideClosestPopup(evt)
 }
 
@@ -165,8 +165,7 @@ function keyСlosePopup(evt) {
 
 function hideClosestPopupOverlay(element) {
   const target = element.target
-  const popupContainer = target.querySelector('.popup__container');
-  if (target.contains(popupContainer) || target.contains(popupScreen)) {
+  if (target.classList.contains('popup_opened')) {
     closePopup(target);
   }
 }

@@ -40,11 +40,8 @@ const popupOpenPict = document.querySelector('.imagePopup')
 const popupPictCont = document.querySelector('.popup__picture')
 const pictureName = popupPictCont.querySelector('.popup__subname')
 const popupScreen = popupPictCont.querySelector('.popup__screen')
-const closePopupProfile = profilePopup.querySelector('.popup__close')
 const formElementProfilePopup = profilePopup.querySelector('.popup__form');
-const closePopupcreateCard = cardPopup.querySelector('.popup__close')
 const formElementCardPopup = cardPopup.querySelector('.popup__form');
-const closePopupPict = popupOpenPict.querySelector('.popup__close')
 const nameInput = profilePopup.querySelector('.popup__name')
 const jobInput = profilePopup.querySelector('.popup__job')
 const nameCardValue = cardPopup.querySelector('.popup__name')
@@ -52,6 +49,7 @@ const pictureCardValue = cardPopup.querySelector('.popup__job')
 const cardPopupOverlay = document.querySelector('.cardPopup')
 const profilePopupOverlay = document.querySelector('.profilePopup')
 const imagePopupoverlay = document.querySelector('.imagePopup')
+const closeButtons = document.querySelectorAll('.popup__close');
 
 initialCards.forEach(element => {
   const mestoElement = createCard(element)
@@ -149,9 +147,6 @@ function handleAddCardFormSubmit(evt) {
 
 buttonProfileOpenPopup.addEventListener('click', openPopupProfile);
 buttonOpenCreateCardPopup.addEventListener('click', openPopupcreateCard);
-closePopupProfile.addEventListener('click', hideClosestPopup)
-closePopupcreateCard.addEventListener('click', hideClosestPopup)
-closePopupPict.addEventListener('click', hideClosestPopup)
 formElementCardPopup.addEventListener('submit', handleAddCardFormSubmit);
 formElementProfilePopup.addEventListener('submit', handleProfileFormSubmit);
 
@@ -169,3 +164,8 @@ function hideClosestPopupOverlay(element) {
     closePopup(target);
   }
 }
+
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});

@@ -108,6 +108,7 @@ function hideClosestPopup(element) {
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', keyСlosePopup)
 }
 
 function handleProfileFormSubmit(evt) {
@@ -132,6 +133,7 @@ function openPopupcreateCard() {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', keyСlosePopup)
 }
 
 function handleAddCardFormSubmit(evt) {
@@ -155,7 +157,7 @@ imagePopupoverlay.addEventListener('click', hideClosestPopupOverlay)
 
 formElementCardPopup.addEventListener('submit', handleAddCardFormSubmit);
 formElementProfilePopup.addEventListener('submit', handleProfileFormSubmit);
-document.addEventListener('keydown', keyСlosePopup)
+
 
 function keyСlosePopup(evt) {
   if (evt.key === 'Escape') {

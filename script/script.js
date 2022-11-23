@@ -109,6 +109,7 @@ function hideClosestPopup(element) {
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', keyСlosePopup)
+  popup.removeEventListener('click', hideClosestPopupOverlay)
 }
 
 function handleProfileFormSubmit(evt) {
@@ -134,6 +135,7 @@ function openPopupcreateCard() {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', keyСlosePopup)
+  popup.addEventListener('click', hideClosestPopupOverlay)
 }
 
 function handleAddCardFormSubmit(evt) {
@@ -151,9 +153,6 @@ buttonOpenCreateCardPopup.addEventListener('click', openPopupcreateCard);
 closePopupProfile.addEventListener('click', hideClosestPopup)
 closePopupcreateCard.addEventListener('click', hideClosestPopup)
 closePopupPict.addEventListener('click', hideClosestPopup)
-cardPopupOverlay.addEventListener('click', hideClosestPopup)
-profilePopupOverlay.addEventListener('click', hideClosestPopupOverlay)
-imagePopupoverlay.addEventListener('click', hideClosestPopupOverlay)
 
 formElementCardPopup.addEventListener('submit', handleAddCardFormSubmit);
 formElementProfilePopup.addEventListener('submit', handleProfileFormSubmit);
@@ -168,9 +167,8 @@ function keyСlosePopup(evt) {
 
 function hideClosestPopupOverlay(element) {
   const target = element.target
-  const targetPopup = target.closest(".popup");
-  const popupContainer = targetPopup.querySelector('.popup__container');
-  if (target.contains(popupContainer)) {
-    closePopup(targetPopup);
+  const popupContainer = target.querySelector('.popup__container');
+  if (target.contains(popupContainer) || target.contains(popupScreen)) {
+    closePopup(target);
   }
 }

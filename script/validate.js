@@ -56,9 +56,6 @@ function setEventListeners (formElement, selectors) {
   });
 
   inputList.forEach(inputElement => {
-
-    toggleButtonState(inputList, buttonElement, selectors);
-
     formElement.addEventListener('input', () =>{
       checkInputValidity(inputElement, selectors)
       toggleButtonState(inputList, buttonElement, selectors);

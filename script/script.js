@@ -107,7 +107,7 @@ function hideClosestPopup(element) {
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', keyСlosePopup)
-  popup.removeEventListener('click', hideClosestPopupOverlay)
+  popup.removeEventListener('mousedown', hideClosestPopupOverlay)
 }
 
 function handleProfileFormSubmit(evt) {
@@ -133,7 +133,7 @@ function openPopupcreateCard() {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', keyСlosePopup)
-  popup.addEventListener('click', hideClosestPopupOverlay)
+  popup.addEventListener('mousedown', hideClosestPopupOverlay)
 }
 
 function handleAddCardFormSubmit(evt) {

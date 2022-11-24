@@ -49,15 +49,15 @@ function setEventListeners (formElement, selectors) {
 
   toggleButtonState (inputList, buttonElement, selectors)
 
+  formElement.addEventListener('reset', () => {
+    setTimeout(() => {
+      toggleButtonState (inputList, buttonElement, selectors)
+    }, 0);
+  });
+
   inputList.forEach(inputElement => {
 
     toggleButtonState(inputList, buttonElement, selectors);
-
-    formElement.addEventListener('reset', () => {
-      setTimeout(() => {
-        toggleButtonState (inputList, buttonElement, selectors)
-      }, 0);
-    });
 
     formElement.addEventListener('input', () =>{
       checkInputValidity(inputElement, selectors)

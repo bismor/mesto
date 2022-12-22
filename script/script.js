@@ -4,9 +4,6 @@ import { initialCardsData } from "./mock-data.js";
 
 enableValidation(selectors)
 
-
-const buttonProfilePopup = document.querySelector('.profile__pencil')
-const mestoTemplate = document.querySelector('.mesto__template').content;
 const mestoUl = document.querySelector('.mesto__ul');
 const cardPopup = document.querySelector('.cardPopup')
 const profilePopup = document.querySelector('.profilePopup')
@@ -24,44 +21,30 @@ const nameInput = profilePopup.querySelector('.popup__name')
 const jobInput = profilePopup.querySelector('.popup__job')
 const nameCardValue = cardPopup.querySelector('.popup__name')
 const pictureCardValue = cardPopup.querySelector('.popup__job')
-const cardPopupOverlay = document.querySelector('.cardPopup')
-const profilePopupOverlay = document.querySelector('.profilePopup')
-const imagePopupoverlay = document.querySelector('.imagePopup')
 const closeButtons = document.querySelectorAll('.popup__close');
-
-
-
+const card = new Card()
 
 initialCardsData.forEach(element => {
-  const card = new Card()
-  card.setOnDeleteClick(handlePostDelete)
-  card.setOnLikeClick(toggleLike)
-  card.setOnOpenPicture(openPicture)
-
-  card.render(element, mestoUl)
+  setEventListener(element)
+  mestoUl.append(card._cardElement)
 })
 
 
-// function createCard(item) {
-//   const cardElement = mestoTemplate.cloneNode(true);
-//   const cardPict = cardElement.querySelector('.mesto__img')
-//   cardPict.alt = item.name
-//   cardPict.src = item.link
-//   cardElement.querySelector('.mesto__title').textContent = item.name;
-//   setEventListener(cardElement)
-//   return cardElement
-// }
+function handleAddCardFormSubmit(evt) {
+  evt.preventDefault();
+  const newCard = {name: nameCardValue.value, link: pictureCardValue.value}
+  setEventListener(newCard)
+  mestoUl.prepend(card._cardElement)
+  evt.target.reset()
+  hideClosestPopup(evt)
+}
 
-// function setEventListener(evt) {
-//   const el = evt.querySelector('.mesto__delete')
-//   el.addEventListener('click', handlePostDelete)
-
-//   const like = evt.querySelector('.mesto__like')
-//   like.addEventListener('click', toggleLike)
-
-//   const picture = evt.querySelector('.mesto__img')
-//   picture.addEventListener('click', openPicture)
-// }
+function setEventListener(element) {
+  card.render(element)
+  card.setOnDeleteClick(handlePostDelete)
+  card.setOnLikeClick(toggleLike)
+  card.setOnOpenPicture(openPicture)
+}
 
 function handlePostDelete(evt) {
   const target = evt.target
@@ -122,14 +105,7 @@ function openPopup(popup) {
   popup.addEventListener('mousedown', hideClosestPopupOverlay)
 }
 
-function handleAddCardFormSubmit(evt) {
-  evt.preventDefault();
-  const newCard = {name: nameCardValue.value, link: pictureCardValue.value}
-  const mestoElement = createCard(newCard)
-  mestoUl.prepend(mestoElement)
-  evt.target.reset()
-  hideClosestPopup(evt)
-}
+
 
 buttonProfileOpenPopup.addEventListener('click', openPopupProfile);
 buttonOpenCreateCardPopup.addEventListener('click', openPopupcreateCard);

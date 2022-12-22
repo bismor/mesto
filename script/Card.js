@@ -22,16 +22,15 @@ class Card {
     this._cardElement.querySelector('.mesto__img').addEventListener('click', this._onOpenPicture)
   }
 
-  render = (cardData, mestoUl) => {
+  render = (cardData) => {
     this._cardElement = Card._template.cloneNode(true).children[0];
     this._cardPict = this._cardElement.querySelector('.mesto__img')
     this._cardPict.alt = cardData.name
     this._cardPict.src = cardData.link
     this._cardElement.querySelector('.mesto__title').textContent = cardData.name;
     this._setEventListeners(this._cardElement)
-    // return this._cardElement
-    mestoUl.append(this._cardElement)
   }
+
 }
 
 export {Card}

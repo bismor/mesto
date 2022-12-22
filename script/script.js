@@ -1,33 +1,9 @@
 import {enableValidation, selectors} from "./validate.js"
+import { Card } from "./Card.js";
+import { initialCardsData } from "./mock-data.js";
 
 enableValidation(selectors)
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  },
-];
 
 const buttonProfilePopup = document.querySelector('.profile__pencil')
 const mestoTemplate = document.querySelector('.mesto__template').content;
@@ -53,31 +29,39 @@ const profilePopupOverlay = document.querySelector('.profilePopup')
 const imagePopupoverlay = document.querySelector('.imagePopup')
 const closeButtons = document.querySelectorAll('.popup__close');
 
-initialCards.forEach(element => {
-  const mestoElement = createCard(element)
-  mestoUl.append(mestoElement)
+
+
+
+initialCardsData.forEach(element => {
+  const card = new Card()
+  card.setOnDeleteClick(handlePostDelete)
+  card.setOnLikeClick(toggleLike)
+  card.setOnOpenPicture(openPicture)
+
+  card.render(element, mestoUl)
 })
 
-function createCard(item) {
-  const cardElement = mestoTemplate.cloneNode(true);
-  const cardPict = cardElement.querySelector('.mesto__img')
-  cardPict.alt = item.name
-  cardPict.src = item.link
-  cardElement.querySelector('.mesto__title').textContent = item.name;
-  setEventListener(cardElement)
-  return cardElement
-}
 
-function setEventListener(evt) {
-  const el = evt.querySelector('.mesto__delete')
-  el.addEventListener('click', handlePostDelete)
+// function createCard(item) {
+//   const cardElement = mestoTemplate.cloneNode(true);
+//   const cardPict = cardElement.querySelector('.mesto__img')
+//   cardPict.alt = item.name
+//   cardPict.src = item.link
+//   cardElement.querySelector('.mesto__title').textContent = item.name;
+//   setEventListener(cardElement)
+//   return cardElement
+// }
 
-  const like = evt.querySelector('.mesto__like')
-  like.addEventListener('click', toggleLike)
+// function setEventListener(evt) {
+//   const el = evt.querySelector('.mesto__delete')
+//   el.addEventListener('click', handlePostDelete)
 
-  const picture = evt.querySelector('.mesto__img')
-  picture.addEventListener('click', openPicture)
-}
+//   const like = evt.querySelector('.mesto__like')
+//   like.addEventListener('click', toggleLike)
+
+//   const picture = evt.querySelector('.mesto__img')
+//   picture.addEventListener('click', openPicture)
+// }
 
 function handlePostDelete(evt) {
   const target = evt.target

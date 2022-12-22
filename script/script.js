@@ -1,8 +1,6 @@
-import {enableValidation, selectors} from "./validate.js"
 import { Card } from "./Card.js";
-import { initialCardsData } from "./mock-data.js";
-
-enableValidation(selectors)
+import { initialCardsData, selectors } from "./mock-data.js";
+import {FormValidator} from './FormValidator.js'
 
 const mestoUl = document.querySelector('.mesto__ul');
 const cardPopup = document.querySelector('.cardPopup')
@@ -23,6 +21,9 @@ const nameCardValue = cardPopup.querySelector('.popup__name')
 const pictureCardValue = cardPopup.querySelector('.popup__job')
 const closeButtons = document.querySelectorAll('.popup__close');
 const card = new Card()
+
+const formValidator = new FormValidator()
+formValidator.enableValidation(selectors)
 
 initialCardsData.forEach(element => {
   setEventListener(element)

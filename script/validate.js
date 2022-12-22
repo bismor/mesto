@@ -82,3 +82,5 @@ const selectors = {
   popupTextTypeError: 'popup__text-type-error',
   formInputError: 'popup__input-error_active'
 };
+
+export {enableValidation, selectors}

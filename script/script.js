@@ -1,3 +1,5 @@
+import {enableValidation, selectors} from "./validate.js"
+
 enableValidation(selectors)
 
 const initialCards = [

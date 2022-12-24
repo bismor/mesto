@@ -27,7 +27,7 @@ export const initialCardsData = [
 
 
 export const selectors = {
-  popupSelector: '.popupValidation',
+  // popupSelector: '.popupValidation',
   sectionSelector: '.popup__section',
   inputSelector: '.popup__text',
   submitButtonSelector: '.popup__button',

@@ -1,10 +1,8 @@
 
 export class FormValidator {
-  constructor(selectors, isValid, formSection, errorElement) {
+  constructor(selectors, form) {
     this._selectors = selectors
-    this._isValid = isValid
-    this._formSection = formSection
-    this._errorElement = errorElement
+    this._form = form
   }
 
   _hasInvalidInput = (inputList) => {
@@ -71,11 +69,7 @@ export class FormValidator {
     })
   }
 
-  enableValidation = (selectors) => {
-    this._formList = document.querySelectorAll(selectors.popupSelector)
-
-    this._formList.forEach(formElement => {
-      this._setEventListeners(formElement, selectors)
-    })
+  enableValidation = () => {
+    this._setEventListeners(this._form, this._selectors)
   }
 }

@@ -17,14 +17,22 @@ const jobInput = profilePopup.querySelector('.popup__job')
 const nameCardValue = cardPopup.querySelector('.popup__name')
 const pictureCardValue = cardPopup.querySelector('.popup__job')
 const closeButtons = document.querySelectorAll('.popup__close');
+const formProfileValidator = new FormValidator(selectors, profilePopup)
+const formValidatorPicture = new FormValidator(selectors, cardPopup)
+formProfileValidator.enableValidation()
+formValidatorPicture.enableValidation()
 
 
-const formValidator = new FormValidator()
-formValidator.enableValidation(selectors)
+function createCard(item) {
+  const card = new Card(item, '.mesto__template')
+  const addCard = card.render()
+  return addCard
+
+}
+
 
 initialCardsData.forEach(element => {
-  const card = new Card(element, '.mesto__template')
-  const addCard = card.render()
+  const addCard = createCard(element)
   mestoUl.append(addCard)
 })
 
@@ -32,38 +40,11 @@ initialCardsData.forEach(element => {
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
   const newCardData = {name: nameCardValue.value, link: pictureCardValue.value}
-  const card = new Card(newCardData, '.mesto__template')
-  const addCard = card.render()
+  const addCard = createCard(newCardData)
   mestoUl.prepend(addCard)
   evt.target.reset()
   hideClosestPopup(evt)
 }
-
-// function setEventListener(card) {
-//   card.setOnDeleteClick(handlePostDelete)
-//   card.setOnLikeClick(toggleLike)
-//   card.setOnOpenPicture(openPicture)
-// }
-
-// function handlePostDelete(evt) {
-//   const target = evt.target
-//   const currentСard = target.closest('.mesto__element')
-//   currentСard.remove()
-// }
-
-// function toggleLike(evt) {
-//   const target = evt.target
-//   target.classList.toggle("mesto__like-active")
-// }
-
-// function openPicture(evt) {
-//   const target = evt.target
-//   openPopup(popupOpenPict)
-//   pictureName.textContent = target.alt;
-//   popupScreen.src = target.src
-//   popupScreen.alt = target.alt
-
-// }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');

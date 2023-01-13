@@ -1,7 +1,7 @@
 import { Card } from "./Card.js";
 import { initialCardsData, selectors } from "./mock-data.js";
 import {FormValidator} from './FormValidator.js'
-
+import Section from "./Section.js";
 
 const mestoUl = document.querySelector('.mesto__ul');
 const cardPopup = document.querySelector('.cardPopup')
@@ -23,18 +23,18 @@ formProfileValidator.enableValidation()
 formValidatorPicture.enableValidation()
 
 
-function createCard(item) {
-  const card = new Card(item, '.mesto__template')
-  const addCard = card.render()
-  return addCard
+const createCard = new Section({
+  items: initialCardsData,
+  renderer: (item) => {
+    const card = new Card(item, '.mesto__template')
+    const addCard = card.render()
+    createCard.addItem(addCard)
+  }
+},
+  mestoUl
+)
 
-}
-
-
-initialCardsData.forEach(element => {
-  const addCard = createCard(element)
-  mestoUl.append(addCard)
-})
+createCard.renderItems()
 
 
 function handleAddCardFormSubmit(evt) {
@@ -92,12 +92,12 @@ formElementCardPopup.addEventListener('submit', handleAddCardFormSubmit);
 formElementProfilePopup.addEventListener('submit', handleProfileFormSubmit);
 
 
-function keyСlosePopup(evt) {
-  if (evt.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened')
-    closePopup(popupOpened)
-  }
-}
+// function keyСlosePopup(evt) {
+//   if (evt.key === 'Escape') {
+//     const popupOpened = document.querySelector('.popup_opened')
+//     closePopup(popupOpened)
+//   }
+// }
 
 function hideClosestPopupOverlay(element) {
   const target = element.target

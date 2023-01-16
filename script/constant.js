@@ -27,7 +27,6 @@ export const initialCardsData = [
 
 
 export const selectors = {
-  // popupSelector: '.popupValidation',
   sectionSelector: '.popup__section',
   inputSelector: '.popup__text',
   submitButtonSelector: '.popup__button',
@@ -37,3 +36,4 @@ export const selectors = {
   popupTextTypeError: 'popup__text-type-error',
   formInputError: 'popup__input-error_active'
 };
+

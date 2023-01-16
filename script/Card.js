@@ -1,15 +1,10 @@
-import {openPopup} from './script.js'
 
-const popupOpenPict = document.querySelector('.imagePopup')
-const popupPictCont = document.querySelector('.popup__picture')
-const pictureName = popupPictCont.querySelector('.popup__subname')
-const popupScreen = popupPictCont.querySelector('.popup__screen')
-
-export class Card {
-  constructor(data, templateSelector) {
+export default class Card {
+  constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -33,11 +28,7 @@ export class Card {
   }
 
   _setOnOpenPicture = (evt) => {
-    const target = evt.target
-    openPopup(popupOpenPict)
-    pictureName.textContent = target.alt;
-    popupScreen.src = target.src
-    popupScreen.alt = target.alt
+    this._handleCardClick(evt)
   }
 
   _setEventListeners = () => {
@@ -53,7 +44,7 @@ export class Card {
     this._cardPict.src = this._link
     this._element.querySelector('.mesto__title').textContent = this._name;
     this._setEventListeners()
-    return this._element
+    return this._element;
   }
 
 }

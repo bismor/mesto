@@ -5,30 +5,30 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css" />
+  <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
   <title>Mesto</title>
 </head>
 
 <body class="body">
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="./images/logo.svg" alt="Логотип сайта" />
+      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип сайта" />
     </header>
 
     <main class="main">
       <section class="profile">
         <div class="info">
-          <img class="profile__avatar" src="./images/avatar.png" alt="Аватар" />
+          <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар" />
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <button type="button" class="profile__button">
-              <img class="profile__pencil" src="./images/pencil.svg" alt="карандаш" />
+              <img class="profile__pencil" src="<%=require('./images/pencil.svg')%>" alt="карандаш" />
             </button>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
         </div>
         <button type="button" class="button">
-          <img class="profile__plus" src="./images/plus.svg" alt="добавить" />
+          <img class="profile__plus" src="<%=require('./images/plus.svg')%>" alt="добавить" />
         </button>
       </section>
       <section class="mesto">
@@ -44,7 +44,7 @@
     <div class="popup profilePopup">
       <div class="popup__container">
         <button type="button" class="popup__close">
-          <img class="popup__img" src="./images/Close.png" alt="Закрыть">
+          <img class="popup__img" src="<%=require('./images/Close.png')%>" alt="Закрыть">
         </button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form name="profile__form" class="popup__form" novalidate>
@@ -64,7 +64,7 @@
     <div class="popup cardPopup">
       <div class="popup__container popup__contcard">
         <button type="button" class="popup__close">
-          <img class="popup__img" src="./images/Close.png" alt="Закрыть">
+          <img class="popup__img" src="<%=require('./images/Close.png')%>" alt="Закрыть">
         </button>
         <h2 class="popup__title">Новое место</h2>
         <form name="card-form" class="popup__form">
@@ -84,7 +84,7 @@
     <div class="popup imagePopup">
       <div class="popup__picture">
         <button type="button" class="popup__close">
-          <img class="popup__img" id="closepict" src="./images/Close.png" alt="Закрыть">
+          <img class="popup__img" id="closepict" src="<%=require('./images/Close.png')%>" alt="Закрыть">
         </button>
         <img class="popup__screen" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
           alt="Архыз" />

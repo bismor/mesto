@@ -33,7 +33,7 @@ const cardList = new Section({
     cardList.addItem(addCard)
   }
 },
-  mestoUl
+  '.mesto__ul'
 )
 
 cardList.renderItems()

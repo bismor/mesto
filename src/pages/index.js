@@ -1,6 +1,6 @@
 import '../pages/index.css'
 import  Card  from "./Card.js";
-import { initialCardsData, selectors } from "./constant.js";
+import { initialCardsData, validationConfig} from "./constant.js";
 import {FormValidator} from './FormValidator.js'
 import Section from "./Section.js";
 import Userinfo from "./UserInfo.js";
@@ -18,8 +18,8 @@ const nameInput = profilePopup.querySelector('.popup__name')
 const jobInput = profilePopup.querySelector('.popup__job')
 const nameCardValue = cardPopup.querySelector('.popup__name')
 const pictureCardValue = cardPopup.querySelector('.popup__job')
-const formProfileValidator = new FormValidator(selectors, profilePopup)
-const formValidatorPicture = new FormValidator(selectors, cardPopup)
+const formProfileValidator = new FormValidator(validationConfig, profilePopup)
+const formValidatorPicture = new FormValidator(validationConfig, cardPopup)
 formProfileValidator.enableValidation()
 formValidatorPicture.enableValidation()
 

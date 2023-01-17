@@ -9,8 +9,8 @@ export default class PopupWithImage extends Popup {
     super(popupOpenPict)
   }
 
-  openPopup (imagesrc, imagealt) {
-    super.openPopup()
+  open (imagesrc, imagealt) {
+    super.open()
     pictureName.textContent = imagealt;
     popupScreen.src = imagesrc
     popupScreen.alt = imagealt
@@ -19,7 +19,7 @@ export default class PopupWithImage extends Popup {
   }
 
   _handCloseButton = () => {
-    super.closePopup()
+    super.close()
   }
 
   setEventListeners =  () => {

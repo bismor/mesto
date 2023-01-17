@@ -3,11 +3,11 @@ export default class Popup {
     this._selectorPopup = selectorPopup;
   }
 
-  openPopup() {
+  open() {
     this._selectorPopup.classList.add('popup_opened');
   }
 
-  closePopup() {
+  close() {
     this._selectorPopup.classList.remove('popup_opened');
     document.removeEventListener('keydown', this._handleEscClose)
     this._selectorPopup.removeEventListener('mousedown', this._handleOverlay)
@@ -15,14 +15,14 @@ export default class Popup {
 
   _handleEscClose = (evt) => {
     if (evt.key === 'Escape') {
-      this.closePopup()
+      this.close()
     }
   }
 
   _handleOverlay = (evt) => {
     const target = evt.target
     if (target.classList.contains('popup_opened')) {
-      this.closePopup();
+      this.close();
     }
   }
 

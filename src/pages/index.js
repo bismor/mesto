@@ -28,7 +28,7 @@ const popupWithImage = new PopupWithImage ()
 const cardList = new Section({
   items: initialCardsData,
   renderer: (item) => {
-    const card = new Card(item, '.mesto__template', function (clickEvent) {popupWithImage.openPopup(clickEvent.target.src, clickEvent.target.alt)})
+    const card = new Card(item, '.mesto__template', function (clickEvent) {popupWithImage.open(clickEvent.target.src, clickEvent.target.alt)})
     const addCard = card.render()
     cardList.addItem(addCard)
   }
@@ -41,7 +41,7 @@ cardList.renderItems()
 function handleAddCardFormSubmit() {
   //создать новую карточку, вставить туда данные новой карточки, отрисовать новую карточку
   const newCardData = {name: nameCardValue.value, link: pictureCardValue.value}
-  const card = new Card(newCardData, '.mesto__template', function (clickEvent) {popupWithImage.openPopup(clickEvent.target.src, clickEvent.target.alt)})
+  const card = new Card(newCardData, '.mesto__template', function (clickEvent) {popupWithImage.open(clickEvent.target.src, clickEvent.target.alt)})
   const renderCard = card.render()
   mestoUl.prepend(renderCard)
 }
@@ -58,13 +58,13 @@ function handleProfileFormSubmit(formvalue) {
 function openPopupProfile() {
   userInfo.getUserInfo()
   const popupWithForm = new PopupWithForm (profilePopup, handleProfileFormSubmit)
-  popupWithForm.openPopup()
+  popupWithForm.open()
   popupWithForm.setEventListeners()
 }
 
 function openPopupcreateCard() {
   const popupWithForm = new PopupWithForm (cardPopup, handleAddCardFormSubmit)
-  popupWithForm.openPopup()
+  popupWithForm.open()
   popupWithForm.setEventListeners()
 }
 

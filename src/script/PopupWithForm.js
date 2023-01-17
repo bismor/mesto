@@ -17,11 +17,11 @@ export default class PopupWithForm extends Popup {
   _handleSumbit = (evt) => {
     evt.preventDefault()
     this._callBackSumbit(this._getInputValues())
-    this.closePopup()
+    this.close()
   }
 
   _handleCloseButton = () => {
-    this.closePopup()
+    this.close()
   }
 
   setEventListeners = () => {
@@ -31,8 +31,8 @@ export default class PopupWithForm extends Popup {
     this._selectorPopup.querySelector('.popup__close').addEventListener('mousedown', this._handleCloseButton);
   }
 
-  closePopup () {
-    super.closePopup()
+  close () {
+    super.close()
     this._selectorPopup.querySelector('.popup__form').reset()
   }
 }

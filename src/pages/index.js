@@ -1,11 +1,11 @@
 import '../pages/index.css'
-import  Card  from "./Card.js";
-import { initialCardsData, validationConfig} from "./constant.js";
-import {FormValidator} from './FormValidator.js'
-import Section from "./Section.js";
-import Userinfo from "./UserInfo.js";
-import PopupWithImage from "./PopupWithImage.js";
-import PopupWithForm from "./PopupWithForm.js";
+import  Card  from "../script/Card.js";
+import { initialCardsData, validationConfig} from "../script/constant.js";
+import {FormValidator} from '../script/FormValidator.js'
+import Section from "../script/Section.js";
+import Userinfo from "../script/UserInfo.js";
+import PopupWithImage from "../script/PopupWithImage.js";
+import PopupWithForm from "../script/PopupWithForm.js";
 
 const mestoUl = document.querySelector('.mesto__ul');
 const cardPopup = document.querySelector('.cardPopup')

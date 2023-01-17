@@ -1,4 +1,4 @@
-import {profileName,profileJob, nameInput, jobInput} from "./script.js"
+import {profileName,profileJob, nameInput, jobInput} from "../pages/index.js"
 export default class Userinfo {
   constructor({userName, userinfo}){
     this._userName = userName

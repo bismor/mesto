@@ -1,11 +1,11 @@
 import '../pages/index.css'
-import  Card  from "../script/Card.js";
-import { initialCardsData, validationConfig} from "../script/constant.js";
-import {FormValidator} from '../script/FormValidator.js'
-import Section from "../script/Section.js";
-import Userinfo from "../script/UserInfo.js";
-import PopupWithImage from "../script/PopupWithImage.js";
-import PopupWithForm from "../script/PopupWithForm.js";
+import  Card  from "../components/Card.js";
+import { initialCardsData, validationConfig} from "../components/constant.js";
+import {FormValidator} from '../components/FormValidator.js'
+import Section from "../components/Section.js";
+import Userinfo from "../components/UserInfo.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
 const mestoUl = document.querySelector('.mesto__ul');
 const cardPopup = document.querySelector('.cardPopup')
@@ -24,13 +24,23 @@ formProfileValidator.enableValidation()
 formValidatorPicture.enableValidation()
 
 const popupWithImage = new PopupWithImage ()
+popupWithImage.setEventListeners()
+const popupWithFormProfile = new PopupWithForm ('.profilePopup', handleProfileFormSubmit)
+popupWithFormProfile.setEventListeners()
+const popupWithFormCard = new PopupWithForm ('.cardPopup', handleAddCardFormSubmit)
+popupWithFormCard.setEventListeners()
+
+
+function getCard(item) {
+  const card = new Card(item, '.mesto__template', (name, link) => {popupWithImage.openPopup(link, name)})
+  return card.render();
+}
 
 const cardList = new Section({
   items: initialCardsData,
-  renderer: (item) => {
-    const card = new Card(item, '.mesto__template', function (clickEvent) {popupWithImage.open(clickEvent.target.src, clickEvent.target.alt)})
-    const addCard = card.render()
-    cardList.addItem(addCard)
+  renderer: (cardData) => {
+    const card = getCard(cardData);
+    cardList.addItem(card);
   }
 },
   '.mesto__ul'
@@ -39,16 +49,14 @@ const cardList = new Section({
 cardList.renderItems()
 
 function handleAddCardFormSubmit() {
-  //создать новую карточку, вставить туда данные новой карточки, отрисовать новую карточку
-  const newCardData = {name: nameCardValue.value, link: pictureCardValue.value}
-  const card = new Card(newCardData, '.mesto__template', function (clickEvent) {popupWithImage.open(clickEvent.target.src, clickEvent.target.alt)})
-  const renderCard = card.render()
-  mestoUl.prepend(renderCard)
+  const card = getCard({name: nameCardValue.value, link: pictureCardValue.value});
+  mestoUl.prepend(card);
 }
 
 const userInfo = new Userinfo ({
-  userName: '.popup__name',
-  userinfo: '.popup__job'
+
+  userName: '.profile__title',
+  userinfo: '.profile__subtitle'
 })
 
 function handleProfileFormSubmit(formvalue) {
@@ -56,16 +64,14 @@ function handleProfileFormSubmit(formvalue) {
 };
 
 function openPopupProfile() {
-  userInfo.getUserInfo()
-  const popupWithForm = new PopupWithForm (profilePopup, handleProfileFormSubmit)
-  popupWithForm.open()
-  popupWithForm.setEventListeners()
+  const input = userInfo.getUserInfo()
+
+  popupWithFormProfile.open()
+  popupWithFormProfile.setFormValue(input)
 }
 
 function openPopupcreateCard() {
-  const popupWithForm = new PopupWithForm (cardPopup, handleAddCardFormSubmit)
-  popupWithForm.open()
-  popupWithForm.setEventListeners()
+  popupWithFormCard.open()
 }
 
 buttonProfileOpenPopup.addEventListener('click', openPopupProfile);

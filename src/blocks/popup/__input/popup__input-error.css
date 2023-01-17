@@ -5,9 +5,10 @@
   font-size: 12px;
   line-height: 14.52px;
   margin-bottom: 13px;
-  display: none;
+  display: block;
+  min-height: 30px;
 }
 
 .popup__input-error_active {
-  display: flex;
+  display: block;
 }

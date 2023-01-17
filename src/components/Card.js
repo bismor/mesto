@@ -1,4 +1,3 @@
-
 export default class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
@@ -16,10 +15,8 @@ export default class Card {
   }
 
 
-  _setOnDeleteClick = (evt) => {
-    const target = evt.target
-    const currentСard = target.closest('.mesto__element')
-    currentСard.remove()
+  _setOnDeleteClick = () => {
+    this._element.remove()
   }
 
   _setOnLikeClick = (evt) => {
@@ -28,13 +25,13 @@ export default class Card {
   }
 
   _setOnOpenPicture = (evt) => {
-    this._handleCardClick(evt)
+    this._handleCardClick(evt.target.src, evt.target.alt)
   }
 
-  _setEventListeners = () => {
+  setEventListeners () {
     this._element.querySelector('.mesto__delete').addEventListener('click', this._setOnDeleteClick);
     this._element.querySelector('.mesto__like').addEventListener('click', this._setOnLikeClick)
-    this._element.querySelector('.mesto__img').addEventListener('click', this._setOnOpenPicture)
+    this._cardPict.addEventListener('click', this._setOnOpenPicture)
   }
 
   render = () => {
@@ -43,7 +40,7 @@ export default class Card {
     this._cardPict.alt = this._name
     this._cardPict.src = this._link
     this._element.querySelector('.mesto__title').textContent = this._name;
-    this._setEventListeners()
+    this.setEventListeners()
     return this._element;
   }
 

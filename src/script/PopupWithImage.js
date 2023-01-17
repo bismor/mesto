@@ -14,18 +14,7 @@ export default class PopupWithImage extends Popup {
     pictureName.textContent = imagealt;
     popupScreen.src = imagesrc
     popupScreen.alt = imagealt
-    this.setEventListeners()
 
-  }
-
-  _handCloseButton = () => {
-    super.close()
-  }
-
-  setEventListeners =  () => {
-    this._selectorPopup.addEventListener('mousedown', this._handleOverlay)
-    document.addEventListener('keydown', this._handleEscClose)
-    this._selectorPopup.querySelector('.popup__close').addEventListener('mousedown', this._handCloseButton);
   }
 
 }

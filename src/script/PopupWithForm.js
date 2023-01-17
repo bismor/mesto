@@ -6,12 +6,12 @@ export default class PopupWithForm extends Popup {
   }
 
   _getInputValues () {
-    const InputList = {}
+    const inputList = {}
     const allForms = this._selectorPopup.querySelectorAll('.popup__text')
     allForms.forEach((input) => {
-      InputList[input.name] = input.value
+      inputList[input.name] = input.value
     })
-    return InputList
+    return inputList
   }
 
   _handleSumbit = (evt) => {

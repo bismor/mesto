@@ -32,7 +32,7 @@ popupWithFormCard.setEventListeners()
 
 
 function getCard(item) {
-  const card = new Card(item, '.mesto__template', (name, link) => {popupWithImage.openPopup(link, name)})
+  const card = new Card(item, '.mesto__template', (name, link) => {popupWithImage.open(link, name)})
   return card.render();
 }
 
@@ -64,10 +64,10 @@ function handleProfileFormSubmit(formvalue) {
 };
 
 function openPopupProfile() {
-  const input = userInfo.getUserInfo()
+  const profileInputsData = userInfo.getUserInfo()
 
   popupWithFormProfile.open()
-  popupWithFormProfile.setFormValue(input)
+  popupWithFormProfile.setFormValue(profileInputsData)
 }
 
 function openPopupcreateCard() {

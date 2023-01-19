@@ -28,11 +28,11 @@ export default class PopupWithForm extends Popup {
     this._popupForm.addEventListener ('submit', this._handleSumbit)
   }
 
-  setFormValue (object) {
+  setFormValue (inputsData) {
     const allInputs = this._popupElement.querySelectorAll('.popup__text')
-    console.log(object)
+    console.log(inputsData)
     allInputs.forEach((input) => {
-      input.value = object[input.name];
+      input.value = inputsData[input.name];
     })
   }
 

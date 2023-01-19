@@ -28,7 +28,7 @@ export default class PopupWithForm extends Popup {
     this._popupForm.addEventListener ('submit', this._handleSumbit)
   }
 
-  setFormValue (inputsData) {
+  setFormValues (inputsData) {
     const allInputs = this._popupElement.querySelectorAll('.popup__text')
     allInputs.forEach((input) => {
       input.value = inputsData[input.name];

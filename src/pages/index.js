@@ -67,7 +67,7 @@ function openPopupProfile() {
   const profileInputsData = userInfo.getUserInfo()
 
   popupWithFormProfile.open()
-  popupWithFormProfile.setFormValue(profileInputsData)
+  popupWithFormProfile.setFormValues(profileInputsData)
 }
 
 function openPopupcreateCard() {

@@ -50,7 +50,7 @@ cardList.renderItems()
 
 function handleAddCardFormSubmit() {
   const card = getCard({name: nameCardValue.value, link: pictureCardValue.value});
-  mestoUl.prepend(card);
+  cardList.beforeaddItem(card);
 }
 
 const userInfo = new Userinfo ({

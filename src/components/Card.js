@@ -24,8 +24,8 @@ export default class Card {
     target.classList.toggle("mesto__like-active")
   }
 
-  _setOnOpenPicture = (evt) => {
-    this._handleCardClick(evt.target.src, evt.target.alt)
+  _setOnOpenPicture = () => {
+    this._handleCardClick(this._link, this._name)
   }
 
   setEventListeners () {

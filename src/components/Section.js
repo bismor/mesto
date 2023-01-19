@@ -10,7 +10,12 @@ export default class Section {
     this._container.append(element);
   }
 
+  beforeaddItem(element) {
+    this._container.prepend(element);
+  }
+
   renderItems() {
     this._items.forEach(this._renderer)
   }
+
 }

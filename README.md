@@ -11,7 +11,6 @@
 * Работа с Вебпаком
 * Работа с классами
 
-[Github Pages](https://bismor.github.io/mesto/)
 
 **Figma**
 

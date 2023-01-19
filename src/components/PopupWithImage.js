@@ -1,7 +1,7 @@
 import Popup from "./Popup.js"
 export default class PopupWithImage extends Popup {
   constructor(selectorPopup) {
-    super('.imagePopup', selectorPopup)
+    super(selectorPopup)
     this._popupPictCont = document.querySelector('.popup__picture')
     this._pictureName = this._popupPictCont.querySelector('.popup__subname')
     this._popupScreen = this._popupPictCont.querySelector('.popup__screen')

@@ -23,7 +23,7 @@ const formValidatorPicture = new FormValidator(validationConfig, cardPopup)
 formProfileValidator.enableValidation()
 formValidatorPicture.enableValidation()
 
-const popupWithImage = new PopupWithImage ()
+const popupWithImage = new PopupWithImage ('.imagePopup')
 popupWithImage.setEventListeners()
 const popupWithFormProfile = new PopupWithForm ('.profilePopup', handleProfileFormSubmit)
 popupWithFormProfile.setEventListeners()

@@ -1,4 +1,5 @@
 import '../pages/index.css'
+import Api from '../components/api';
 import  Card  from "../components/Card.js";
 import { initialCardsData, validationConfig} from "../components/constant.js";
 import {FormValidator} from '../components/FormValidator.js'
@@ -10,6 +11,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 const mestoUl = document.querySelector('.mesto__ul');
 const cardPopup = document.querySelector('.cardPopup')
 const profilePopup = document.querySelector('.profilePopup')
+const profileAvatar = document.querySelector('.profile__avatar')
 const buttonProfileOpenPopup = document.querySelector('.profile__button')
 const buttonOpenCreateCardPopup = document.querySelector('.button')
 const profileName = document.querySelector('.profile__title');
@@ -78,5 +80,19 @@ buttonProfileOpenPopup.addEventListener('click', openPopupProfile);
 buttonOpenCreateCardPopup.addEventListener('click', openPopupcreateCard);
 
 export {profileName, profileJob, nameInput, jobInput}
+
+const api = new Api();
+
+const getProfile = api.getProfileInformation()
+function setProfile() {
+  getProfile.then(data => {
+    profileName.textContent = data.name
+    profileJob.textContent = data.about
+    profileAvatar.src = data.avatar
+  })
+}
+setProfile()
+
+api.getInitialCards()
 
 

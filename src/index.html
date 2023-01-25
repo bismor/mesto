@@ -90,6 +90,35 @@
         <h2 class="popup__subname"></h2>
       </div>
     </div>
+
+    <div class="popup deleteCardPopup">
+      <div class="popup__container popup__contcard">
+        <button type="button" class="popup__close">
+          <img class="popup__img" src="<%=require('./images/Close.png')%>" alt="Закрыть">
+        </button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form name="card-form" class="popup__form">
+          <button type="submit" id="addpicture" class="popup__button">Да</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup cardPopup">
+      <div class="popup__container popup__contcard">
+        <button type="button" class="popup__close">
+          <img class="popup__img" src="<%=require('./images/Close.png')%>" alt="Закрыть">
+        </button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form name="card-form" class="popup__form">
+          <section class="popup__section">
+            <input type="url" name="popup__job" class="popup__text popup__job" placeholder="Ссылка на картинку" required>
+            <span class="popup__input-error"></span>
+          </section>
+          <button type="submit" id="addpicture" class="popup__button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
   </div>
 
   <template class="mesto__template">

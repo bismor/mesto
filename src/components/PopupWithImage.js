@@ -14,4 +14,10 @@ export default class PopupWithImage extends Popup {
     this._popupScreen.alt = imagealt
   }
 
+  close () {
+    super.close()
+    this._popupScreen.src = null
+    this._popupScreen.alt = null
+  }
+
 }

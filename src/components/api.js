@@ -4,7 +4,7 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-57/cards ", {
+    return fetch("https://mesto.nomoreparties.co/v1/cohort-57/cards", {
       headers: {
         authorization: this._authorization,
       },
@@ -14,25 +14,27 @@ export default class Api {
   }
 
   getProfileInformation() {
-    return fetch("https://nomoreparties.co/v1/cohort-57/users/me ", {
+    return fetch("https://nomoreparties.co/v1/cohort-57/users/me", {
       headers: {
         authorization: this._authorization,
       },
     }).then((res) => {
       return res.json();
-    });
+    })
   }
 
   addCard(data) {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-57/cards ", {
+    return fetch("https://mesto.nomoreparties.co/v1/cohort-57/cards", {
+      method: "POST",
+      body: JSON.stringify(data),
       headers: {
         authorization: this._authorization,
+        'Content-Type': 'Application/JSON',
       }
     }).then((res)=> {
       if (res.ok) {
         return res.json();
       }
-
       return Promise.reject("Произошла ошибка")
     })
   }

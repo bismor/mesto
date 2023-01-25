@@ -56,7 +56,7 @@ function setProfile() {
 }
 setProfile();
 
-function getCard(item) {
+function getElementTemplate(item) {
   const card = new Card(item, ".mesto__template", (name, link) => {
     popupWithImage.open(link, name);
   });
@@ -67,11 +67,12 @@ const cardList = new Section(
   {
     items: [],
     renderer: (cardData) => {
-      const card = getCard(cardData);
+      const card = getElementTemplate(cardData);
       cardList.addItem(card);
     },
   },
-  ".mesto__ul"
+  ".mesto__ul",
+  api
 );
 
 const getCards = api.getInitialCards();
@@ -81,17 +82,24 @@ getCards.then((data) => {
     const cardInput = {};
     cardInput["name"] = input.name;
     cardInput["link"] = input.link;
+    cardInput["_id"] = input._id;
+    cardInput["likes"] = input.likes.length;
+
     cardsInfo.push(cardInput);
   });
   cardList.renderItems(cardsInfo);
 });
 
 function handleAddCardFormSubmit() {
-  const card = getCard({
-    name: nameCardValue.value,
-    link: pictureCardValue.value,
-  });
-  cardList.beforeaddItem(card);
+  const name = nameCardValue.value
+  const link = pictureCardValue.value
+  api
+    .addCard({name, link})
+    .then((data) => {
+      data = {...data, likes: data.likes.length}
+      const card = getElementTemplate(data);
+      cardList.beforeaddItem(card)})
+    .catch((err)=> console.log(err));
 }
 
 const userInfo = new Userinfo({

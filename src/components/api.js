@@ -22,5 +22,19 @@ export default class Api {
       return res.json();
     });
   }
+
+  addCard(data) {
+    return fetch("https://mesto.nomoreparties.co/v1/cohort-57/cards ", {
+      headers: {
+        authorization: this._authorization,
+      }
+    }).then((res)=> {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject("Произошла ошибка")
+    })
+  }
   // другие методы работы с API
 }

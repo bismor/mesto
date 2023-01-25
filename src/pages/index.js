@@ -1,110 +1,125 @@
-import '../pages/index.css'
-import Api from '../components/api';
-import  Card  from "../components/Card.js";
-import {validationConfig} from "../components/constant.js";
-import {FormValidator} from '../components/FormValidator.js'
+import "../pages/index.css";
+import Api from "../components/api";
+import Card from "../components/Card.js";
+import { validationConfig } from "../components/constant.js";
+import { FormValidator } from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Userinfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
-const mestoUl = document.querySelector('.mesto__ul');
-const cardPopup = document.querySelector('.cardPopup')
-const profilePopup = document.querySelector('.profilePopup')
-const profileAvatarButton = document.querySelector('.profile__buttonpict')
-const profileAvatar = document.querySelector('.profile__avatar')
-const buttonProfileOpenPopup = document.querySelector('.profile__button')
-const buttonOpenCreateCardPopup = document.querySelector('.button')
-const profileName = document.querySelector('.profile__title');
-const profileJob = document.querySelector('.profile__subtitle');
-const nameInput = profilePopup.querySelector('.popup__name')
-const jobInput = profilePopup.querySelector('.popup__job')
-const nameCardValue = cardPopup.querySelector('.popup__name')
-const pictureCardValue = cardPopup.querySelector('.popup__job')
-const formProfileValidator = new FormValidator(validationConfig, profilePopup)
-const formValidatorPicture = new FormValidator(validationConfig, cardPopup)
-formProfileValidator.enableValidation()
-formValidatorPicture.enableValidation()
+const mestoUl = document.querySelector(".mesto__ul");
+const cardPopup = document.querySelector(".cardPopup");
+const profilePopup = document.querySelector(".profilePopup");
+const profileAvatarButton = document.querySelector(".profile__buttonpict");
+const profileAvatar = document.querySelector(".profile__avatar");
+const buttonProfileOpenPopup = document.querySelector(".profile__button");
+const buttonOpenCreateCardPopup = document.querySelector(".button");
+const profileName = document.querySelector(".profile__title");
+const profileJob = document.querySelector(".profile__subtitle");
+const nameInput = profilePopup.querySelector(".popup__name");
+const jobInput = profilePopup.querySelector(".popup__job");
+const nameCardValue = cardPopup.querySelector(".popup__name");
+const pictureCardValue = cardPopup.querySelector(".popup__job");
+const formProfileValidator = new FormValidator(validationConfig, profilePopup);
+const formValidatorPicture = new FormValidator(validationConfig, cardPopup);
+formProfileValidator.enableValidation();
+formValidatorPicture.enableValidation();
 
-const popupWithImage = new PopupWithImage ('.imagePopup')
-popupWithImage.setEventListeners()
-const popupWithFormProfile = new PopupWithForm ('.profilePopup', handleProfileFormSubmit)
-popupWithFormProfile.setEventListeners()
-const popupWithFormCard = new PopupWithForm ('.cardPopup', handleAddCardFormSubmit)
-popupWithFormCard.setEventListeners()
-const popupWithChangeAvatar = new PopupWithForm('.changeAvatar',handleAddCardFormSubmit)
-popupWithChangeAvatar.setEventListeners()
+const popupWithImage = new PopupWithImage(".imagePopup");
+popupWithImage.setEventListeners();
+const popupWithFormProfile = new PopupWithForm(
+  ".profilePopup",
+  handleProfileFormSubmit
+);
+popupWithFormProfile.setEventListeners();
+const popupWithFormCard = new PopupWithForm(
+  ".cardPopup",
+  handleAddCardFormSubmit
+);
+popupWithFormCard.setEventListeners();
+const popupWithChangeAvatar = new PopupWithForm(
+  ".changeAvatar",
+  handleAddCardFormSubmit
+);
+popupWithChangeAvatar.setEventListeners();
 
 const api = new Api();
 
-const getProfile = api.getProfileInformation()
+const getProfile = api.getProfileInformation();
 function setProfile() {
-  getProfile.then(data => {
-    profileName.textContent = data.name
-    profileJob.textContent = data.about
-    profileAvatar.src = data.avatar
-  })
+  getProfile.then((data) => {
+    profileName.textContent = data.name;
+    profileJob.textContent = data.about;
+    profileAvatar.src = data.avatar;
+  });
 }
-setProfile()
+setProfile();
 
 function getCard(item) {
-  const card = new Card(item, '.mesto__template', (name, link) => {popupWithImage.open(link, name)})
+  const card = new Card(item, ".mesto__template", (name, link) => {
+    popupWithImage.open(link, name);
+  });
   return card.render();
 }
 
-const getCards = api.getInitialCards()
-getCards.then((data) => {
-  const cardsInfo = []
-  data.forEach((input) =>{
-    const cardInfo = {}
-    cardInfo['name'] = input.name
-    cardInfo['link'] = input.link
-    cardsInfo.push(cardInfo)
-  })
-  const cardList = new Section({
-    items: cardsInfo,
+const cardList = new Section(
+  {
+    items: [],
     renderer: (cardData) => {
       const card = getCard(cardData);
       cardList.addItem(card);
-    }
+    },
   },
-    '.mesto__ul'
-  )
-  cardList.renderItems()
-})
+  ".mesto__ul"
+);
+
+const getCards = api.getInitialCards();
+getCards.then((data) => {
+  const cardsInfo = [];
+  data.forEach((input) => {
+    const cardInput = {};
+    cardInput["name"] = input.name;
+    cardInput["link"] = input.link;
+    cardsInfo.push(cardInput);
+  });
+  cardList.renderItems(cardsInfo);
+});
 
 function handleAddCardFormSubmit() {
-  const card = getCard({name: nameCardValue.value, link: pictureCardValue.value});
+  const card = getCard({
+    name: nameCardValue.value,
+    link: pictureCardValue.value,
+  });
   cardList.beforeaddItem(card);
 }
 
-const userInfo = new Userinfo ({
-
-  userName: '.profile__title',
-  userinfo: '.profile__subtitle'
-})
+const userInfo = new Userinfo({
+  userName: ".profile__title",
+  userinfo: ".profile__subtitle",
+});
 
 function handleProfileFormSubmit(formvalue) {
-  userInfo.setUserInfo(formvalue)
-};
+  userInfo.setUserInfo(formvalue);
+}
 
 function openPopupProfile() {
-  const profileInputsData = userInfo.getUserInfo()
+  const profileInputsData = userInfo.getUserInfo();
 
-  popupWithFormProfile.open()
-  popupWithFormProfile.setFormValues(profileInputsData)
+  popupWithFormProfile.open();
+  popupWithFormProfile.setFormValues(profileInputsData);
 }
 
 function openPopupcreateCard() {
-  popupWithFormCard.open()
+  popupWithFormCard.open();
 }
 
 function openChangeAvatar() {
-  popupWithChangeAvatar.open()
+  popupWithChangeAvatar.open();
 }
 
-buttonProfileOpenPopup.addEventListener('click', openPopupProfile);
-buttonOpenCreateCardPopup.addEventListener('click', openPopupcreateCard);
-profileAvatarButton.addEventListener('click', openChangeAvatar)
+buttonProfileOpenPopup.addEventListener("click", openPopupProfile);
+buttonOpenCreateCardPopup.addEventListener("click", openPopupcreateCard);
+profileAvatarButton.addEventListener("click", openChangeAvatar);
 
-export {profileName, profileJob, nameInput, jobInput}
+export { profileName, profileJob, nameInput, jobInput };

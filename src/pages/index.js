@@ -32,23 +32,43 @@ popupWithFormProfile.setEventListeners()
 const popupWithFormCard = new PopupWithForm ('.cardPopup', handleAddCardFormSubmit)
 popupWithFormCard.setEventListeners()
 
+const api = new Api();
+
+const getProfile = api.getProfileInformation()
+function setProfile() {
+  getProfile.then(data => {
+    profileName.textContent = data.name
+    profileJob.textContent = data.about
+    profileAvatar.src = data.avatar
+  })
+}
+setProfile()
 
 function getCard(item) {
   const card = new Card(item, '.mesto__template', (name, link) => {popupWithImage.open(link, name)})
   return card.render();
 }
 
-const cardList = new Section({
-  items: initialCardsData,
-  renderer: (cardData) => {
-    const card = getCard(cardData);
-    cardList.addItem(card);
-  }
-},
-  '.mesto__ul'
-)
-
-cardList.renderItems()
+const getCards = api.getInitialCards()
+getCards.then((data) => {
+  const cardsInfo = []
+  data.forEach((input) =>{
+    const cardInfo = {}
+    cardInfo['name'] = input.name
+    cardInfo['link'] = input.link
+    cardsInfo.push(cardInfo)
+  })
+  const cardList = new Section({
+    items: cardsInfo,
+    renderer: (cardData) => {
+      const card = getCard(cardData);
+      cardList.addItem(card);
+    }
+  },
+    '.mesto__ul'
+  )
+  cardList.renderItems()
+})
 
 function handleAddCardFormSubmit() {
   const card = getCard({name: nameCardValue.value, link: pictureCardValue.value});
@@ -80,19 +100,3 @@ buttonProfileOpenPopup.addEventListener('click', openPopupProfile);
 buttonOpenCreateCardPopup.addEventListener('click', openPopupcreateCard);
 
 export {profileName, profileJob, nameInput, jobInput}
-
-const api = new Api();
-
-const getProfile = api.getProfileInformation()
-function setProfile() {
-  getProfile.then(data => {
-    profileName.textContent = data.name
-    profileJob.textContent = data.about
-    profileAvatar.src = data.avatar
-  })
-}
-setProfile()
-
-api.getInitialCards()
-
-

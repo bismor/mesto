@@ -17,7 +17,10 @@
     <main class="main">
       <section class="profile">
         <div class="info">
-          <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар" />
+          <button type="button" class="profile__buttonpict">
+            <div class="profile__changeavatar"></div>
+            <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар" />
+          </button>
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <button type="button" class="profile__button">
@@ -103,7 +106,7 @@
       </div>
     </div>
 
-    <div class="popup cardPopup">
+    <div class="popup changeAvatar">
       <div class="popup__container popup__contcard">
         <button type="button" class="popup__close">
           <img class="popup__img" src="<%=require('./images/Close.png')%>" alt="Закрыть">

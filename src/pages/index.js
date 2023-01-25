@@ -1,7 +1,7 @@
 import '../pages/index.css'
 import Api from '../components/api';
 import  Card  from "../components/Card.js";
-import { initialCardsData, validationConfig} from "../components/constant.js";
+import {validationConfig} from "../components/constant.js";
 import {FormValidator} from '../components/FormValidator.js'
 import Section from "../components/Section.js";
 import Userinfo from "../components/UserInfo.js";
@@ -11,6 +11,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 const mestoUl = document.querySelector('.mesto__ul');
 const cardPopup = document.querySelector('.cardPopup')
 const profilePopup = document.querySelector('.profilePopup')
+const profileAvatarButton = document.querySelector('.profile__buttonpict')
 const profileAvatar = document.querySelector('.profile__avatar')
 const buttonProfileOpenPopup = document.querySelector('.profile__button')
 const buttonOpenCreateCardPopup = document.querySelector('.button')
@@ -31,6 +32,8 @@ const popupWithFormProfile = new PopupWithForm ('.profilePopup', handleProfileFo
 popupWithFormProfile.setEventListeners()
 const popupWithFormCard = new PopupWithForm ('.cardPopup', handleAddCardFormSubmit)
 popupWithFormCard.setEventListeners()
+const popupWithChangeAvatar = new PopupWithForm('.changeAvatar',handleAddCardFormSubmit)
+popupWithChangeAvatar.setEventListeners()
 
 const api = new Api();
 
@@ -96,7 +99,12 @@ function openPopupcreateCard() {
   popupWithFormCard.open()
 }
 
+function openChangeAvatar() {
+  popupWithChangeAvatar.open()
+}
+
 buttonProfileOpenPopup.addEventListener('click', openPopupProfile);
 buttonOpenCreateCardPopup.addEventListener('click', openPopupcreateCard);
+profileAvatarButton.addEventListener('click', openChangeAvatar)
 
 export {profileName, profileJob, nameInput, jobInput}

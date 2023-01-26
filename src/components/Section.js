@@ -17,7 +17,6 @@ export default class Section {
     if (cardsData != undefined) {
       this._items = cardsData;
     }
-    console.log(cardsData)
     this._items.forEach(this._renderer);
   }
 }

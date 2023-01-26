@@ -41,7 +41,7 @@ export default class Api {
     })
   }
 
-  changeProfile(formvalue) {
+  changeProfileInfo(formvalue) {
     return fetch("https://mesto.nomoreparties.co/v1/cohort-57/users/me", {
       method: 'PATCH',
       headers: {
@@ -52,6 +52,25 @@ export default class Api {
         name: formvalue.popup__name,
         about: formvalue.popup__job
       })
+    })
+  }
+
+  changeProfileAvatar(link) {
+    return fetch("https://mesto.nomoreparties.co/v1/cohort-57/users/me/avatar", {
+      method: 'PATCH',
+      body: JSON.stringify({
+        avatar: link
+      }),
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': 'Application/JSON',
+      },
+    })
+    .then((res)=> {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject("Произошла ошибка")
     })
   }
   // другие методы работы с API

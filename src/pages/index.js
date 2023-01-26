@@ -8,18 +8,21 @@ import Userinfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
-const mestoUl = document.querySelector(".mesto__ul");
+
 const cardPopup = document.querySelector(".cardPopup");
 const profilePopup = document.querySelector(".profilePopup");
-const profileAvatarButton = document.querySelector(".profile__buttonpict");
+const openChangeprofileAvatar = document.querySelector(".profile__buttonpict");
 const profileAvatar = document.querySelector(".profile__avatar");
 const buttonProfileOpenPopup = document.querySelector(".profile__button");
 const buttonOpenCreateCardPopup = document.querySelector(".button");
+const buttonChangeAvatar = document.querySelector("changeavatarsubmit");
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
 const nameInput = profilePopup.querySelector(".popup__name");
 const jobInput = profilePopup.querySelector(".popup__job");
 const nameCardValue = cardPopup.querySelector(".popup__name");
+const avatarPopup = document.querySelector(".changeAvatar");
+const avatarInput = avatarPopup.querySelector('.popup__job');
 const pictureCardValue = cardPopup.querySelector(".popup__job");
 const formProfileValidator = new FormValidator(validationConfig, profilePopup);
 const formValidatorPicture = new FormValidator(validationConfig, cardPopup);
@@ -40,7 +43,7 @@ const popupWithFormCard = new PopupWithForm(
 popupWithFormCard.setEventListeners();
 const popupWithChangeAvatar = new PopupWithForm(
   ".changeAvatar",
-  handleAddCardFormSubmit
+  handleChangeAvatar
 );
 popupWithChangeAvatar.setEventListeners();
 
@@ -109,7 +112,7 @@ const userInfo = new Userinfo({
 
 function handleProfileFormSubmit(formvalue) {
   api
-  .changeProfile(formvalue)
+  .changeProfileInfo(formvalue)
   userInfo.setUserInfo(formvalue);
 }
 
@@ -128,8 +131,17 @@ function openChangeAvatar() {
   popupWithChangeAvatar.open();
 }
 
+function handleChangeAvatar() {
+  const avatar = avatarInput.value
+  console.log(avatar)
+  api
+  .changeProfileAvatar(avatar)
+  profileAvatar.src = avatar
+
+}
+
 buttonProfileOpenPopup.addEventListener("click", openPopupProfile);
 buttonOpenCreateCardPopup.addEventListener("click", openPopupcreateCard);
-profileAvatarButton.addEventListener("click", openChangeAvatar);
+openChangeprofileAvatar.addEventListener("click", openChangeAvatar);
 
 export { profileName, profileJob, nameInput, jobInput };

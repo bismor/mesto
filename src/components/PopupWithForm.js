@@ -10,6 +10,7 @@ export default class PopupWithForm extends Popup {
   _getInputValues () {
     const inputList = {}
     const allInputs = this._popupElement.querySelectorAll('.popup__text')
+    this._popupElement.querySelector('.popup__button').textContent = "Подождите.."
     allInputs.forEach((input) => {
       inputList[input.name] = input.value
     })
@@ -21,6 +22,7 @@ export default class PopupWithForm extends Popup {
     this._callBackSumbit(this._getInputValues())
     super.close()
     this._popupForm.reset()
+    this._popupElement.querySelector('.popup__button').textContent = "Сохранить"
   }
 
   setEventListeners () {

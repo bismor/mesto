@@ -1,7 +1,7 @@
 export default class Card {
   #owner;
   #userId;
-  constructor(data, templateSelector, handleCardClick, handleDeleteClick) {
+  constructor(data, templateSelector, handleCardClick, handleDeleteClick, handleAddLikeCard, handleRemoveLikeCard) {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
@@ -14,6 +14,8 @@ export default class Card {
     this.#owner = data.owner;
     this.#userId = "d29b7f6e26540a674e4f7173";
     this._handleDeleteClick = handleDeleteClick;
+    this._handleAddLikeCard = handleAddLikeCard
+    this._handleRemoveLikeCard = handleRemoveLikeCard
   }
 
   _getTemplate() {
@@ -27,7 +29,6 @@ export default class Card {
   _setOnDeleteClick = (evt) => {
     const target = evt.target
     const currentСard = target.closest('.mesto__element')
-
     currentСard.remove()
   }
 
@@ -35,13 +36,24 @@ export default class Card {
     this._handleDeleteClick()
   }
 
-  // _setOnDeleteClick = () => {
-  //   this._element.querySelector(this._templateSelector).remove()
-  // }
+  _checkUserLikes = () => {
+    const userIdLikes = []
+    console.log(this._likes, "Card")
+    this._likes.forEach(element => {
+      userIdLikes.push(element._id);
+    });
+    return userIdLikes
+  }
 
-  _setOnLikeClick = (evt) => {
+  _changeLikeClick = (evt) => {
     const target = evt.target
-    target.classList.toggle("mesto__like-active")
+    const userIdLikes = this._checkUserLikes()
+    if (userIdLikes.includes(this.#userId)) {
+      this._handleRemoveLikeCard(this._cardPict.id)
+    } else {
+      this._handleAddLikeCard(this._cardPict.id)
+    }
+    target.classList.toggle("mesto__like-active");
   }
 
   _setOnOpenPicture = () => {
@@ -52,22 +64,26 @@ export default class Card {
     if ((this.#owner == this.#userId) && (this.#owner === this.#userId)) {
       this._element.querySelector('.mesto__delete').addEventListener('click', this._setOpenApprovalDelete);
     }
-    this._element.querySelector('.mesto__like').addEventListener('click', this._setOnLikeClick)
+    this._element.querySelector('.mesto__like').addEventListener('click', this._changeLikeClick)
     this._cardPict.addEventListener('click', this._setOnOpenPicture)
   }
 
+    setLike = (value) => {
+      this._likeScore.textContent = value.length
+      this._likes = value
+      this._checkUserLikes()
+    }
 
   render = () => {
     this._cardPict.alt = this._name
     this._cardPict.src = this._link
     this._cardPict.id = this._id
-    this._likeScore.textContent = this._likes
+    this._likeScore.textContent = this._likes.length
     this._element.querySelector('.mesto__title').textContent = this._name;
-    // console.log(this.#owner !== this.#userId)
-    // console.log(this.#owner != this.#userId)
+
+
+
     if ((this.#owner !== this.#userId) && (this.#owner != this.#userId)) {
-      console.log(this.#owner)
-      console.log(this.#userId)
       this._element.querySelector('.mesto__delete').remove()
     }
     this.setEventListeners()

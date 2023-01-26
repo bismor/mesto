@@ -67,15 +67,22 @@ function setProfile() {
 }
 setProfile();
 
+const cardsInformation = []
+
 function getElementTemplate(item) {
   const card = new Card(
     item,
     ".mesto__template",
     (name, link) => {popupWithImage.open(link, name)},
-    () => {popupWithApprovalDeleteCard.open()},
+    () => {popupWithApprovalDeleteCard.open(); popupWithApprovalDeleteCard.setFormValues({payload: item._id})},
+    (id) => {handleAddLikeCard(id)},
+    (id) => {handleRemoveLikeCard(id)},
   );
+  cardsInformation.push(card)
   return card.render();
 }
+
+console.log(cardsInformation)
 
 const cardList = new Section(
   {
@@ -96,7 +103,7 @@ getCards.then((data) => {
     cardInput["name"] = input.name;
     cardInput["link"] = input.link;
     cardInput["_id"] = input._id;
-    cardInput["likes"] = input.likes.length;
+    cardInput["likes"] = input.likes;
     cardInput["owner"] = input.owner._id;
     cardsInfo.push(cardInput);
   });
@@ -109,7 +116,7 @@ function handleAddCardFormSubmit() {
   api
     .addCard({name, link})
     .then((data) => {
-      data = {...data, likes: data.likes.length, owner: data.owner._id}
+      data = {...data, likes: data.likes, owner: data.owner._id}
       const card = getElementTemplate(data);
       cardList.beforeaddItem(card)})
     .catch((err)=> console.log(err));
@@ -150,14 +157,28 @@ function handleChangeAvatar() {
 
 }
 
-function handleDeleteCard(formvalue) {
-  console.log(formvalue)
-  // api
-  // .deleteCardServer(id)
+function handleDeleteCard(id) {
+  api
+  .deleteCardServer(id.payload)
+}
+
+function handleAddLikeCard(id) {
+  api.addLikeCard(id)
+  .then((data) => {
+    const card =  cardsInformation.find(item => item._id === id)
+    card.setLike(data.likes)
+  })
+}
+
+function handleRemoveLikeCard(id) {
+  api.removeLikeCard(id)
+  .then((data) => {
+    const card =  cardsInformation.find(item => item._id === id)
+    card.setLike(data.likes)
+  })
 }
 
 buttonProfileOpenPopup.addEventListener("click", openPopupProfile);
 buttonOpenCreateCardPopup.addEventListener("click", openPopupcreateCard);
 openChangeprofileAvatar.addEventListener("click", openChangeAvatar);
 
-export { profileName, profileJob, nameInput, jobInput };

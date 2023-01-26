@@ -1,7 +1,7 @@
 export default class Card {
   #owner;
   #userId;
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(data, templateSelector, handleCardClick, handleDeleteClick) {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
@@ -13,6 +13,7 @@ export default class Card {
     this._likeScore = this._element.querySelector('.like__score');
     this.#owner = data.owner;
     this.#userId = "d29b7f6e26540a674e4f7173";
+    this._handleDeleteClick = handleDeleteClick;
   }
 
   _getTemplate() {
@@ -30,12 +31,11 @@ export default class Card {
     currentСard.remove()
   }
 
-  _setOpenApprovalDelete = (evt) => {
-
+  _setOpenApprovalDelete = () => {
+    this._handleDeleteClick()
   }
 
   // _setOnDeleteClick = () => {
-  //   console.log(this._element.querySelector(this._templateSelector))
   //   this._element.querySelector(this._templateSelector).remove()
   // }
 
@@ -49,7 +49,7 @@ export default class Card {
   }
 
   setEventListeners () {
-    if (this.#owner == this.#userId) {
+    if ((this.#owner == this.#userId) && (this.#owner === this.#userId)) {
       this._element.querySelector('.mesto__delete').addEventListener('click', this._setOpenApprovalDelete);
     }
     this._element.querySelector('.mesto__like').addEventListener('click', this._setOnLikeClick)
@@ -63,7 +63,11 @@ export default class Card {
     this._cardPict.id = this._id
     this._likeScore.textContent = this._likes
     this._element.querySelector('.mesto__title').textContent = this._name;
-    if (this.#owner !== this.#userId) {
+    // console.log(this.#owner !== this.#userId)
+    // console.log(this.#owner != this.#userId)
+    if ((this.#owner !== this.#userId) && (this.#owner != this.#userId)) {
+      console.log(this.#owner)
+      console.log(this.#userId)
       this._element.querySelector('.mesto__delete').remove()
     }
     this.setEventListeners()

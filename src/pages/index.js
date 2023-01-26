@@ -49,7 +49,11 @@ const popupWithChangeAvatar = new PopupWithForm(
 );
 popupWithChangeAvatar.setEventListeners();
 
-
+const popupWithApprovalDeleteCard = new PopupWithForm(
+  ".deleteCardPopup",
+  handleDeleteCard
+);
+popupWithApprovalDeleteCard.setEventListeners();
 
 const api = new Api();
 
@@ -64,9 +68,12 @@ function setProfile() {
 setProfile();
 
 function getElementTemplate(item) {
-  const card = new Card(item, ".mesto__template", (name, link) => {
-    popupWithImage.open(link, name);
-  });
+  const card = new Card(
+    item,
+    ".mesto__template",
+    (name, link) => {popupWithImage.open(link, name)},
+    () => {popupWithApprovalDeleteCard.open()},
+  );
   return card.render();
 }
 
@@ -91,8 +98,6 @@ getCards.then((data) => {
     cardInput["_id"] = input._id;
     cardInput["likes"] = input.likes.length;
     cardInput["owner"] = input.owner._id;
-    // console.log(input.owner._id, 'id пользователя')
-    // console.log(input._id, 'ID карточки')
     cardsInfo.push(cardInput);
   });
   cardList.renderItems(cardsInfo);
@@ -104,7 +109,7 @@ function handleAddCardFormSubmit() {
   api
     .addCard({name, link})
     .then((data) => {
-      data = {...data, likes: data.likes.length}
+      data = {...data, likes: data.likes.length, owner: data.owner._id}
       const card = getElementTemplate(data);
       cardList.beforeaddItem(card)})
     .catch((err)=> console.log(err));
@@ -116,6 +121,7 @@ const userInfo = new Userinfo({
 });
 
 function handleProfileFormSubmit(formvalue) {
+  console.log(formvalue)
   api
   .changeProfileInfo(formvalue)
   userInfo.setUserInfo(formvalue);
@@ -142,6 +148,12 @@ function handleChangeAvatar() {
   .changeProfileAvatar(avatar)
   profileAvatar.src = avatar
 
+}
+
+function handleDeleteCard(formvalue) {
+  console.log(formvalue)
+  // api
+  // .deleteCardServer(id)
 }
 
 buttonProfileOpenPopup.addEventListener("click", openPopupProfile);

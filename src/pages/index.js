@@ -75,7 +75,6 @@ const cardList = new Section(
     },
   },
   ".mesto__ul",
-  api
 );
 
 const getCards = api.getInitialCards();
@@ -87,7 +86,9 @@ getCards.then((data) => {
     cardInput["link"] = input.link;
     cardInput["_id"] = input._id;
     cardInput["likes"] = input.likes.length;
-
+    cardInput["owner"] = input.owner._id;
+    // console.log(input.owner._id, 'id пользователя')
+    // console.log(input._id, 'ID карточки')
     cardsInfo.push(cardInput);
   });
   cardList.renderItems(cardsInfo);
@@ -133,7 +134,6 @@ function openChangeAvatar() {
 
 function handleChangeAvatar() {
   const avatar = avatarInput.value
-  console.log(avatar)
   api
   .changeProfileAvatar(avatar)
   profileAvatar.src = avatar

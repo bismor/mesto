@@ -30,7 +30,7 @@ export default class Card {
     currentСard.remove()
   }
 
-  _setOpenApprovalDelete = () => {
+  _setOpenApprovalDelete = (evt) => {
 
   }
 
@@ -50,7 +50,7 @@ export default class Card {
 
   setEventListeners () {
     if (this.#owner == this.#userId) {
-      this._element.querySelector('.mesto__delete').addEventListener('click', this._setOnDeleteClick);
+      this._element.querySelector('.mesto__delete').addEventListener('click', this._setOpenApprovalDelete);
     }
     this._element.querySelector('.mesto__like').addEventListener('click', this._setOnLikeClick)
     this._cardPict.addEventListener('click', this._setOnOpenPicture)

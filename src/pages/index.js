@@ -15,7 +15,6 @@ const openChangeprofileAvatar = document.querySelector(".profile__buttonpict");
 const profileAvatar = document.querySelector(".profile__avatar");
 const buttonProfileOpenPopup = document.querySelector(".profile__button");
 const buttonOpenCreateCardPopup = document.querySelector(".button");
-const buttonChangeAvatar = document.querySelector("changeavatarsubmit");
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
 const nameInput = profilePopup.querySelector(".popup__name");
@@ -31,21 +30,26 @@ formValidatorPicture.enableValidation();
 
 const popupWithImage = new PopupWithImage(".imagePopup");
 popupWithImage.setEventListeners();
+
 const popupWithFormProfile = new PopupWithForm(
   ".profilePopup",
   handleProfileFormSubmit
 );
 popupWithFormProfile.setEventListeners();
+
 const popupWithFormCard = new PopupWithForm(
   ".cardPopup",
   handleAddCardFormSubmit
 );
 popupWithFormCard.setEventListeners();
+
 const popupWithChangeAvatar = new PopupWithForm(
   ".changeAvatar",
   handleChangeAvatar
 );
 popupWithChangeAvatar.setEventListeners();
+
+
 
 const api = new Api();
 

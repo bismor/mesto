@@ -23,10 +23,21 @@ export default class Card {
     return cardElement
   }
 
+  _setOnDeleteClick = (evt) => {
+    const target = evt.target
+    const currentСard = target.closest('.mesto__element')
 
-  _setOnDeleteClick = () => {
-    this._element.remove()
+    currentСard.remove()
   }
+
+  _setOpenApprovalDelete = () => {
+
+  }
+
+  // _setOnDeleteClick = () => {
+  //   console.log(this._element.querySelector(this._templateSelector))
+  //   this._element.querySelector(this._templateSelector).remove()
+  // }
 
   _setOnLikeClick = (evt) => {
     const target = evt.target

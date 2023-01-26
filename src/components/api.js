@@ -1,3 +1,5 @@
+import { data } from "autoprefixer";
+
 export default class Api {
   constructor() {
     this._authorization = "2c0e8e40-9bc8-4cbb-b338-6dd82b568a54";
@@ -36,6 +38,20 @@ export default class Api {
         return res.json();
       }
       return Promise.reject("Произошла ошибка")
+    })
+  }
+
+  changeProfile(formvalue) {
+    return fetch("https://mesto.nomoreparties.co/v1/cohort-57/users/me", {
+      method: 'PATCH',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': 'Application/JSON',
+      },
+      body: JSON.stringify({
+        name: formvalue.popup__name,
+        about: formvalue.popup__job
+      })
     })
   }
   // другие методы работы с API

@@ -108,6 +108,8 @@ const userInfo = new Userinfo({
 });
 
 function handleProfileFormSubmit(formvalue) {
+  api
+  .changeProfile(formvalue)
   userInfo.setUserInfo(formvalue);
 }
 

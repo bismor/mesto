@@ -1,15 +1,16 @@
-import { data } from "autoprefixer";
 
 export default class Api {
   constructor() {
     this._authorization = "2c0e8e40-9bc8-4cbb-b338-6dd82b568a54";
+    this._headers = {
+      authorization: this._authorization,
+      'Content-Type': 'Application/JSON',
+    }
   }
 
   getInitialCards() {
     return fetch("https://mesto.nomoreparties.co/v1/cohort-57/cards", {
-      headers: {
-        authorization: this._authorization,
-      },
+      headers: this._headers,
     }).then((res) => {
       return res.json();
     });
@@ -17,9 +18,7 @@ export default class Api {
 
   getProfileInformation() {
     return fetch("https://nomoreparties.co/v1/cohort-57/users/me", {
-      headers: {
-        authorization: this._authorization,
-      },
+      headers: this._headers,
     }).then((res) => {
       return res.json();
     })
@@ -29,20 +28,14 @@ export default class Api {
     return fetch("https://mesto.nomoreparties.co/v1/cohort-57/cards", {
       method: "POST",
       body: JSON.stringify(data),
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': 'Application/JSON',
-      }
+      headers: this._headers
     })
   }
 
   changeProfileInfo(formvalue) {
     return fetch("https://mesto.nomoreparties.co/v1/cohort-57/users/me", {
       method: 'PATCH',
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': 'Application/JSON',
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: formvalue.popup__name,
         about: formvalue.popup__job
@@ -72,20 +65,14 @@ export default class Api {
   deleteCardServer(id) {
     return fetch ("https://mesto.nomoreparties.co/v1/cohort-57/cards/"+id, {
       method: "DELETE",
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': 'Application/JSON',
-      },
+      headers: this._headers,
     })
   }
 
   addLikeCard(id) {
     return fetch("https://mesto.nomoreparties.co/v1/cohort-57/cards/"+id+"/likes", {
       method: "PUT",
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': 'Application/JSON',
-      }
+      headers: this._headers
     })
     .then((res)=> {
       if (res.ok) {
@@ -98,10 +85,7 @@ export default class Api {
   removeLikeCard(id) {
     return fetch("https://mesto.nomoreparties.co/v1/cohort-57/cards/"+id+"/likes", {
       method: "DELETE",
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': 'Application/JSON',
-      }
+      headers: this._headers
     })
     .then((res)=> {
       if (res.ok) {

@@ -62,11 +62,24 @@ popupWithApprovalDeleteCard.setEventListeners();
 const api = new Api();
 
 function setProfile() {
-  api.getProfileInformation()
+  Promise.all([api.getInitialCards(),api.getProfileInformation()])
   .then((data) => {
-    profileName.textContent = data.name;
-    profileJob.textContent = data.about;
-    profileAvatar.src = data.avatar;
+    const [cards, user] = data
+    console.log(data)
+    profileName.textContent = user.name;
+    profileJob.textContent = user.about;
+    profileAvatar.src = user.avatar;
+    const cardsInfo = [];
+    cards.forEach((input) => {
+      const cardInput = {};
+      cardInput["name"] = input.name;
+      cardInput["link"] = input.link;
+      cardInput["_id"] = input._id;
+      cardInput["likes"] = input.likes;
+      cardInput["owner"] = input.owner._id;
+      cardsInfo.push(cardInput);
+    })
+    cardList.renderItems(cardsInfo);
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
@@ -102,19 +115,7 @@ const cardList = new Section(
 );
 
 api.getInitialCards()
-.then((data) => {
-  const cardsInfo = [];
-  data.forEach((input) => {
-    const cardInput = {};
-    cardInput["name"] = input.name;
-    cardInput["link"] = input.link;
-    cardInput["_id"] = input._id;
-    cardInput["likes"] = input.likes;
-    cardInput["owner"] = input.owner._id;
-    cardsInfo.push(cardInput);
-  })
-  cardList.renderItems(cardsInfo);
-})
+
 .catch((err) => {
   console.log(err); // выведем ошибку в консоль
 });

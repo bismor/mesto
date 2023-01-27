@@ -61,13 +61,17 @@ popupWithApprovalDeleteCard.setEventListeners();
 
 const api = new Api();
 
-const getProfile = api.getProfileInformation();
 function setProfile() {
-  getProfile.then((data) => {
+  api.getProfileInformation()
+  .then((data) => {
     profileName.textContent = data.name;
     profileJob.textContent = data.about;
     profileAvatar.src = data.avatar;
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
   });
+
 }
 setProfile();
 
@@ -108,8 +112,11 @@ api.getInitialCards()
     cardInput["likes"] = input.likes;
     cardInput["owner"] = input.owner._id;
     cardsInfo.push(cardInput);
-  });
+  })
   cardList.renderItems(cardsInfo);
+})
+.catch((err) => {
+  console.log(err); // выведем ошибку в консоль
 });
 
 function handleAddCardFormSubmit() {
@@ -128,6 +135,9 @@ function handleAddCardFormSubmit() {
     const card = getElementTemplate(data);
     cardList.beforeaddItem(card)
   })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 }
 
 const userInfo = new Userinfo({
@@ -144,6 +154,9 @@ function handleProfileFormSubmit(formvalue) {
       userInfo.setUserInfo(formvalue);
     }
   })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 }
 
 function openPopupProfile() {
@@ -166,22 +179,22 @@ function handleChangeAvatar() {
   api
   .changeProfileAvatar(avatar)
   profileAvatar.src = avatar
-
 }
 
 function handleDeleteCard(id) {
-  console.log(id)
   api
   .deleteCardServer(id.payload)
 }
 
 function handleAddLikeCard(id) {
-  debugger
   api.addLikeCard(id)
   .then((data) => {
     const card =  cardsInformation.find(item => item._id === id)
     card.setLike(data.likes)
   })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 }
 
 function handleRemoveLikeCard(id) {
@@ -190,6 +203,9 @@ function handleRemoveLikeCard(id) {
     const card =  cardsInformation.find(item => item._id === id)
     card.setLike(data.likes)
   })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 }
 
 buttonProfileOpenPopup.addEventListener("click", openPopupProfile);

@@ -24,10 +24,8 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close()
-    console.log()
     this._popupForm.reset()
     this._popupElement.querySelector('.popup__button').textContent = "Сохранить"
-    console.log('close')
   }
 
   setEventListeners () {

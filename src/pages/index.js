@@ -61,6 +61,8 @@ popupWithApprovalDeleteCard.setEventListeners();
 
 const api = new Api();
 
+
+
 function setProfile() {
   Promise.all([api.getInitialCards(),api.getProfileInformation()])
   .then((data) => {
@@ -69,6 +71,7 @@ function setProfile() {
     profileName.textContent = user.name;
     profileJob.textContent = user.about;
     profileAvatar.src = user.avatar;
+
     const cardsInfo = [];
     cards.forEach((input) => {
       const cardInput = {};
@@ -88,8 +91,6 @@ function setProfile() {
 }
 setProfile();
 
-const cardsInformation = []
-
 function getElementTemplate(item) {
   const card = new Card(
     item,
@@ -99,7 +100,6 @@ function getElementTemplate(item) {
     (id) => {handleAddLikeCard(id)},
     (id) => {handleRemoveLikeCard(id)},
   );
-  cardsInformation.push(card)
   return card.render();
 }
 

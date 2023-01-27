@@ -97,8 +97,8 @@ const cardList = new Section(
   ".mesto__ul",
 );
 
-const getCards = api.getInitialCards();
-getCards.then((data) => {
+api.getInitialCards()
+.then((data) => {
   const cardsInfo = [];
   data.forEach((input) => {
     const cardInput = {};

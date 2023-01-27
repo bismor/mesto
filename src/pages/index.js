@@ -1,5 +1,6 @@
 import "../pages/index.css";
-import Api from "../components/api";
+import Api from "../components/Api.js";
+import PopupWithApproval from "../components/PopupWithApproval";
 import Card from "../components/Card.js";
 import { validationConfig } from "../components/constant.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -11,6 +12,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 
 const cardPopup = document.querySelector(".cardPopup");
 const profilePopup = document.querySelector(".profilePopup");
+const changeAvatar = document.querySelector(".changeAvatar")
 const openChangeprofileAvatar = document.querySelector(".profile__buttonpict");
 const profileAvatar = document.querySelector(".profile__avatar");
 const buttonProfileOpenPopup = document.querySelector(".profile__button");
@@ -25,8 +27,10 @@ const avatarInput = avatarPopup.querySelector('.popup__job');
 const pictureCardValue = cardPopup.querySelector(".popup__job");
 const formProfileValidator = new FormValidator(validationConfig, profilePopup);
 const formValidatorPicture = new FormValidator(validationConfig, cardPopup);
+const formChangeAvatarValidator = new FormValidator(validationConfig, changeAvatar);
 formProfileValidator.enableValidation();
 formValidatorPicture.enableValidation();
+formChangeAvatarValidator.enableValidation();
 
 const popupWithImage = new PopupWithImage(".imagePopup");
 popupWithImage.setEventListeners();
@@ -82,8 +86,6 @@ function getElementTemplate(item) {
   return card.render();
 }
 
-console.log(cardsInformation)
-
 const cardList = new Section(
   {
     items: [],
@@ -128,7 +130,6 @@ const userInfo = new Userinfo({
 });
 
 function handleProfileFormSubmit(formvalue) {
-  console.log(formvalue)
   api
   .changeProfileInfo(formvalue)
   userInfo.setUserInfo(formvalue);

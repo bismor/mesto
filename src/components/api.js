@@ -33,11 +33,6 @@ export default class Api {
         authorization: this._authorization,
         'Content-Type': 'Application/JSON',
       }
-    }).then((res)=> {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject("Произошла ошибка")
     })
   }
 

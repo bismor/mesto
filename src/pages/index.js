@@ -53,7 +53,7 @@ const popupWithChangeAvatar = new PopupWithForm(
 );
 popupWithChangeAvatar.setEventListeners();
 
-const popupWithApprovalDeleteCard = new PopupWithForm(
+const popupWithApprovalDeleteCard = new PopupWithApproval(
   ".deleteCardPopup",
   handleDeleteCard
 );
@@ -116,12 +116,18 @@ function handleAddCardFormSubmit() {
   const name = nameCardValue.value
   const link = pictureCardValue.value
   api
-    .addCard({name, link})
-    .then((data) => {
-      data = {...data, likes: data.likes, owner: data.owner._id}
-      const card = getElementTemplate(data);
-      cardList.beforeaddItem(card)})
-    .catch((err)=> console.log(err));
+  .addCard({name, link})
+  .then((res) => {
+    if (res.ok) {
+      popupWithFormCard.close()
+      return res.json()
+    }
+  })
+  .then((data) => {
+    data = {...data, likes: data.likes, owner: data.owner._id}
+    const card = getElementTemplate(data);
+    cardList.beforeaddItem(card)
+  })
 }
 
 const userInfo = new Userinfo({
@@ -132,7 +138,12 @@ const userInfo = new Userinfo({
 function handleProfileFormSubmit(formvalue) {
   api
   .changeProfileInfo(formvalue)
-  userInfo.setUserInfo(formvalue);
+  .then ((res) => {
+    if (res.ok) {
+      popupWithFormProfile.close()
+      userInfo.setUserInfo(formvalue);
+    }
+  })
 }
 
 function openPopupProfile() {
@@ -159,11 +170,13 @@ function handleChangeAvatar() {
 }
 
 function handleDeleteCard(id) {
+  console.log(id)
   api
   .deleteCardServer(id.payload)
 }
 
 function handleAddLikeCard(id) {
+  debugger
   api.addLikeCard(id)
   .then((data) => {
     const card =  cardsInformation.find(item => item._id === id)

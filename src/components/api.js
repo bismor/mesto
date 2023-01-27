@@ -77,12 +77,6 @@ export default class Api {
         'Content-Type': 'Application/JSON',
       },
     })
-    .then((res)=> {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject("Произошла ошибка")
-    })
   }
 
   addLikeCard(id) {

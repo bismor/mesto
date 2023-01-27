@@ -183,7 +183,16 @@ function handleChangeAvatar() {
 
 function handleDeleteCard(id) {
   api
-  .deleteCardServer(id.payload)
+  .deleteCardServer(id)
+  .then ((res) => {
+    if (res.ok) {
+      popupWithApprovalDeleteCard.close()
+      // popupWithApprovalDeleteCard.deleteCardForm()
+    }
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 }
 
 function handleAddLikeCard(id) {

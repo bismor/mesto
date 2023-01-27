@@ -38,7 +38,6 @@ export default class Card {
 
   _checkUserLikes = () => {
     const userIdLikes = []
-    console.log(this._likes, "Card")
     this._likes.forEach(element => {
       userIdLikes.push(element._id);
     });

@@ -5,12 +5,12 @@ export default class PopupWithForm extends Popup {
     this._callBackSumbit = callBackSumbit
     this._popupForm = this._popupElement.querySelector('.popup__form')
     this._handleSumbit = this._handleSumbit.bind(this);
+    this._inputList = this._popupForm.querySelectorAll('.popup__text');
   }
 
   _getInputValues () {
     const inputList = {}
-    const allInputs = this._popupElement.querySelectorAll('.popup__text')
-    allInputs.forEach((input) => {
+    this._inputList.forEach((input) => {
       inputList[input.name] = input.value
     })
     return inputList
@@ -34,8 +34,7 @@ export default class PopupWithForm extends Popup {
   }
 
   setFormValues (inputsData) {
-    const allInputs = this._popupElement.querySelectorAll('.popup__text')
-    allInputs.forEach((input) => {
+    this._inputList.forEach((input) => {
       input.value = inputsData[input.name];
     })
   }

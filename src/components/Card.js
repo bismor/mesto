@@ -1,21 +1,23 @@
 export default class Card {
   #owner;
   #userId;
-  constructor(data, templateSelector, handleCardClick, handleDeleteClick, handleAddLikeCard, handleRemoveLikeCard) {
+  constructor(data, templateSelector, handleCardClick, handleDeleteClick, handleAddLikeCard, handleRemoveLikeCard, myUserID) {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
-    this._likes = data.likes;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._element = this._getTemplate();
     this._cardPict = this._element.querySelector('.mesto__img');
     this._likeScore = this._element.querySelector('.like__score');
-    this.#owner = data.owner;
-    this.#userId = "d29b7f6e26540a674e4f7173";
+    this.#owner = data.owner._id;
+    this.#userId = myUserID;
     this._handleDeleteClick = handleDeleteClick;
-    this._handleAddLikeCard = handleAddLikeCard
-    this._handleRemoveLikeCard = handleRemoveLikeCard
+    this._handleAddLikeCard = handleAddLikeCard;
+    this._handleRemoveLikeCard = handleRemoveLikeCard;
+    this._cardSection = this._element.querySelector(".mesto__element");
+    this._likeButton = this._element.querySelector(".mesto__like")
+    this.setLikes(data.likes)
   }
 
   _getTemplate() {
@@ -26,33 +28,29 @@ export default class Card {
     return cardElement
   }
 
-  _setOnDeleteClick = (evt) => {
-    const target = evt.target
-    const currentСard = target.closest('.mesto__element')
-    currentСard.remove()
-  }
-
   _setOpenApprovalDelete = () => {
-    this._handleDeleteClick()
+    this._handleDeleteClick(this._setOnDeleteClick)
   }
 
-  _checkUserLikes = () => {
-    const userIdLikes = []
-    this._likes.forEach(element => {
-      userIdLikes.push(element._id);
-    });
-    return userIdLikes
-  }
-
-  _changeLikeClick = (evt) => {
-    const target = evt.target
-    const userIdLikes = this._checkUserLikes()
-    if (userIdLikes.includes(this.#userId)) {
-      this._handleRemoveLikeCard(this._cardPict.id)
+  _updateLikes = () => {
+    if (this._checkFindUserByID(this._likes, this.#userId)){
+      this._likeButton.classList.add("mesto__like-active");
     } else {
-      this._handleAddLikeCard(this._cardPict.id)
+      this._likeButton.classList.remove("mesto__like-active");
     }
-    target.classList.toggle("mesto__like-active");
+    this._likeScore.textContent = this._likes.length
+  }
+
+  _checkFindUserByID = (arr, id) => {
+    return arr.find((el) => el._id === id)
+  }
+
+  _changeLikeClick = () => {
+    if (this._checkFindUserByID(this._likes, this.#userId)){
+      this._handleRemoveLikeCard(this._id, this.setLikes)
+    } else {
+      this._handleAddLikeCard(this._id, this.setLikes)
+    }
   }
 
   _setOnOpenPicture = () => {
@@ -60,29 +58,25 @@ export default class Card {
   }
 
   setEventListeners () {
-    if ((this.#owner == this.#userId) && (this.#owner === this.#userId)) {
+    if (this.#owner === this.#userId) {
       this._element.querySelector('.mesto__delete').addEventListener('click', this._setOpenApprovalDelete);
     }
     this._element.querySelector('.mesto__like').addEventListener('click', this._changeLikeClick)
     this._cardPict.addEventListener('click', this._setOnOpenPicture)
   }
 
-    setLike = (value) => {
-      this._likeScore.textContent = value.length
-      this._likes = value
-      this._checkUserLikes()
-    }
+  setLikes = (value) => {
+    this._likes = value
+    this._updateLikes()
+  }
 
   render = () => {
     this._cardPict.alt = this._name
     this._cardPict.src = this._link
-    this._cardPict.id = this._id
+    this._cardSection.id = `card${this._id}`
     this._likeScore.textContent = this._likes.length
     this._element.querySelector('.mesto__title').textContent = this._name;
-
-
-
-    if ((this.#owner !== this.#userId) && (this.#owner != this.#userId)) {
+    if (this.#owner !== this.#userId) {
       this._element.querySelector('.mesto__delete').remove()
     }
     this.setEventListeners()

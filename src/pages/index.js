@@ -17,10 +17,6 @@ const openChangeprofileAvatar = document.querySelector(".profile__buttonpict");
 const profileAvatar = document.querySelector(".profile__avatar");
 const buttonProfileOpenPopup = document.querySelector(".profile__button");
 const buttonOpenCreateCardPopup = document.querySelector(".button");
-const profileName = document.querySelector(".profile__title");
-const profileJob = document.querySelector(".profile__subtitle");
-const nameInput = profilePopup.querySelector(".popup__name");
-const jobInput = profilePopup.querySelector(".popup__job");
 const nameCardValue = cardPopup.querySelector(".popup__name");
 const avatarPopup = document.querySelector(".changeAvatar");
 const avatarInput = avatarPopup.querySelector('.popup__job');
@@ -61,80 +57,53 @@ popupWithApprovalDeleteCard.setEventListeners();
 
 const api = new Api();
 
+let cardList = undefined
 
-
-function setProfile() {
+function main() {
+  api.getInitialCards()
   Promise.all([api.getInitialCards(),api.getProfileInformation()])
   .then((data) => {
     const [cards, user] = data
-    console.log(data)
-    profileName.textContent = user.name;
-    profileJob.textContent = user.about;
-    profileAvatar.src = user.avatar;
-
-    const cardsInfo = [];
-    cards.forEach((input) => {
-      const cardInput = {};
-      cardInput["name"] = input.name;
-      cardInput["link"] = input.link;
-      cardInput["_id"] = input._id;
-      cardInput["likes"] = input.likes;
-      cardInput["owner"] = input.owner._id;
-      cardsInfo.push(cardInput);
-    })
-    cardList.renderItems(cardsInfo);
+    userInfo.setUserInfo(user);
+    userInfo.setUserAvatar(user.avatar)
+    cardList = new Section(
+      (cardData) => {
+        const card = getElementTemplate(cardData, user._id);
+        cardList.addItem(card);
+      },
+      ".mesto__ul",
+    );
+    cardList.renderItems(cards);
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
   });
 
 }
-setProfile();
+main();
 
-function getElementTemplate(item) {
+function getElementTemplate(item, myUserID) {
   const card = new Card(
     item,
     ".mesto__template",
     (name, link) => {popupWithImage.open(link, name)},
     () => {popupWithApprovalDeleteCard.open(); popupWithApprovalDeleteCard.setFormValues({payload: item._id})},
-    (id) => {handleAddLikeCard(id)},
-    (id) => {handleRemoveLikeCard(id)},
+    handleAddLikeCard,
+    handleRemoveLikeCard,
+    myUserID
   );
   return card.render();
 }
-
-const cardList = new Section(
-  {
-    items: [],
-    renderer: (cardData) => {
-      const card = getElementTemplate(cardData);
-      cardList.addItem(card);
-    },
-  },
-  ".mesto__ul",
-);
-
-api.getInitialCards()
-
-.catch((err) => {
-  console.log(err); // выведем ошибку в консоль
-});
 
 function handleAddCardFormSubmit() {
   const name = nameCardValue.value
   const link = pictureCardValue.value
   api
   .addCard({name, link})
-  .then((res) => {
-    if (res.ok) {
-      popupWithFormCard.close()
-      return res.json()
-    }
-  })
   .then((data) => {
-    data = {...data, likes: data.likes, owner: data.owner._id}
-    const card = getElementTemplate(data);
+    const card = getElementTemplate(data, data.owner._id);
     cardList.beforeaddItem(card)
+    popupWithFormCard.close()
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
@@ -144,16 +113,15 @@ function handleAddCardFormSubmit() {
 const userInfo = new Userinfo({
   userName: ".profile__title",
   userinfo: ".profile__subtitle",
+  useravatar: ".profile__avatar"
 });
 
 function handleProfileFormSubmit(formvalue) {
   api
   .changeProfileInfo(formvalue)
-  .then ((res) => {
-    if (res.ok) {
-      popupWithFormProfile.close()
-      userInfo.setUserInfo(formvalue);
-    }
+  .then (() => {
+    popupWithFormProfile.close()
+    userInfo.setUserInfo(formvalue);
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
@@ -179,39 +147,42 @@ function handleChangeAvatar() {
   const avatar = avatarInput.value
   api
   .changeProfileAvatar(avatar)
-  profileAvatar.src = avatar
+  .then(() => {
+    popupWithChangeAvatar.close()
+    profileAvatar.src = avatar
+  })
+}
+
+function deleteFromDom(selector) {
+  document.querySelector(selector)?.remove()
 }
 
 function handleDeleteCard(id) {
   api
   .deleteCardServer(id)
-  .then ((res) => {
-    if (res.ok) {
-      popupWithApprovalDeleteCard.close()
-      // popupWithApprovalDeleteCard.deleteCardForm()
-    }
+  .then (() => {
+    popupWithApprovalDeleteCard.close()
+    deleteFromDom(`#card${id}`)
   })
   .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
+    console.log(err);
   });
 }
 
-function handleAddLikeCard(id) {
+function handleAddLikeCard(id, onSuccsses) {
   api.addLikeCard(id)
   .then((data) => {
-    const card =  cardsInformation.find(item => item._id === id)
-    card.setLike(data.likes)
+    onSuccsses(data.likes)
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
   });
 }
 
-function handleRemoveLikeCard(id) {
+function handleRemoveLikeCard(id, onSuccsses) {
   api.removeLikeCard(id)
   .then((data) => {
-    const card =  cardsInformation.find(item => item._id === id)
-    card.setLike(data.likes)
+    onSuccsses(data.likes)
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль

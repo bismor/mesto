@@ -8,20 +8,23 @@ export default class Api {
     }
   }
 
+  _resToJSON(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject("Произошла ошибка")
+  }
+
   getInitialCards() {
     return fetch("https://mesto.nomoreparties.co/v1/cohort-57/cards", {
       headers: this._headers,
-    }).then((res) => {
-      return res.json();
-    });
+    }).then(this._resToJSON)
   }
 
   getProfileInformation() {
     return fetch("https://nomoreparties.co/v1/cohort-57/users/me", {
       headers: this._headers,
-    }).then((res) => {
-      return res.json();
-    })
+    }).then(this._resToJSON)
   }
 
   addCard(data) {
@@ -29,7 +32,7 @@ export default class Api {
       method: "POST",
       body: JSON.stringify(data),
       headers: this._headers
-    })
+    }).then(this._resToJSON)
   }
 
   changeProfileInfo(formvalue) {
@@ -37,10 +40,11 @@ export default class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: formvalue.popup__name,
-        about: formvalue.popup__job
+        name: formvalue.name,
+        about: formvalue.about
       })
     })
+    .then(this._resToJSON)
   }
 
   changeProfileAvatar(link) {
@@ -54,32 +58,21 @@ export default class Api {
         'Content-Type': 'Application/JSON',
       },
     })
-    .then((res)=> {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject("Произошла ошибка")
-    })
+    .then(this._resToJSON)
   }
 
   deleteCardServer(id) {
     return fetch ("https://mesto.nomoreparties.co/v1/cohort-57/cards/"+id, {
       method: "DELETE",
       headers: this._headers,
-    })
+    }).then(this._resToJSON)
   }
 
   addLikeCard(id) {
     return fetch("https://mesto.nomoreparties.co/v1/cohort-57/cards/"+id+"/likes", {
       method: "PUT",
       headers: this._headers
-    })
-    .then((res)=> {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject("Произошла ошибка")
-    })
+    }).then(this._resToJSON)
   }
 
   removeLikeCard(id) {
@@ -87,12 +80,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers
     })
-    .then((res)=> {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject("Произошла ошибка")
-    })
+    .then(this._resToJSON)
   }
 
   // другие методы работы с API

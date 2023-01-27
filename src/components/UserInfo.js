@@ -1,19 +1,28 @@
 export default class Userinfo {
-  constructor({userName, userinfo}){
+  constructor({userName, userinfo, useravatar}){
     this._userName = document.querySelector(userName)
-    this._userinfo = document.querySelector(userinfo)
+    this._userInfo = document.querySelector(userinfo)
+    this._userAvatar =  document.querySelector(useravatar)
+
   }
 
   getUserInfo() {
     //возвращает 1 обхект с двумя данными
     const profileInformation = {}
-    profileInformation.popup__name = this._userName.textContent
-    profileInformation.popup__job = this._userinfo.textContent
+    profileInformation.name = this._userName.textContent
+    profileInformation.about = this._userInfo.textContent
+
     return profileInformation
   }
 
   setUserInfo (profileData) {
-    this._userName.textContent = profileData.popup__name;
-    this._userinfo.textContent = profileData.popup__job;
+    this._userName.textContent = profileData.name;
+    this._userInfo.textContent = profileData.about;
   }
+
+  //Метод находится отдельно, т.к. описание может меняться отдельно от аватара
+  setUserAvatar (avatar) {
+    this._userAvatar.src = avatar
+  }
+
 }

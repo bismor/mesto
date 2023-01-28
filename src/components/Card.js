@@ -61,7 +61,7 @@ export default class Card {
     if (this.#owner === this.#userId) {
       this._element.querySelector('.mesto__delete').addEventListener('click', this._setOpenApprovalDelete);
     }
-    this._element.querySelector('.mesto__like').addEventListener('click', this._changeLikeClick)
+    this._likeButton.addEventListener('click', this._changeLikeClick)
     this._cardPict.addEventListener('click', this._setOnOpenPicture)
   }
 

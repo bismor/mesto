@@ -24,7 +24,7 @@ export default class PopupWithApproval extends Popup {
   close() {
     super.close()
     this._popupForm.reset()
-    this._popupElement.querySelector('.popup__button').textContent = "Сохранить"
+    this._popupElement.querySelector('.popup__button').textContent = "Да"
   }
 
   setEventListeners () {

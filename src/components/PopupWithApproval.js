@@ -8,28 +8,26 @@ export default class PopupWithApproval extends Popup {
     this._handleSumbit = this._handleSumbit.bind(this);
     this._popupButton = this._popupElement.querySelector('.popup__button')
     this._cardID =  this._popupButton.id
-    console.log(this._popupButton.id)
   }
 
   _handleSumbit (evt) {
     evt.preventDefault()
     this._popupButton.textContent = "Подождите.."
-    this._callBackSumbit(this._popupButton.id)
+    this._callBackSumbit(this._cardID)
   }
 
   resetNameSubmit () {
     this._popupButton.textContent = "Да"
-    this._popupButton.id = ""
+    this._cardID = ""
   }
 
   open (IdCard) {
     super.open()
-    this._popupButton.id = IdCard
+    this._cardID = IdCard
   }
 
   deleteCardFromDom () {
-    console.log('delete')
-    document.getElementById(`${this._popupButton.id}`)?.remove();
+    document.getElementById(`${this._cardID}`)?.remove();
   }
 
   close() {

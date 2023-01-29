@@ -30,7 +30,7 @@ export default class Card {
   }
 
   _setOpenApprovalDelete = () => {
-    this._handleDeleteClick()
+    this._handleDeleteClick(this.deleteCardFromDom)
   }
 
   _updateLikes = () => {
@@ -66,7 +66,7 @@ export default class Card {
     this._cardPict.addEventListener('click', this._setOnOpenPicture)
   }
 
-  deleteCardFromDom () {
+  deleteCardFromDom = () => {
     this._cardSection.remove()
   }
 

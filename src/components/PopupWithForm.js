@@ -19,7 +19,7 @@ export default class PopupWithForm extends Popup {
 
   _handleSumbit (evt) {
     evt.preventDefault()
-    this._popupButton.textContent = "Подождите.."
+    this._popupButton.textContent = "Сохранение.."
     this._callBackSumbit(this._getInputValues())
   }
 

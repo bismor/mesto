@@ -59,7 +59,10 @@ popupWithApprovalDeleteCard.setEventListeners();
 
 const api = new Api();
 
-let cardList = undefined;
+const cardList = new Section((cardData, myUserID) => {
+  const card = getElementTemplate(cardData, myUserID);
+  cardList.addItem(card);
+}, ".mesto__ul");
 
 function main() {
   Promise.all([api.getInitialCards(), api.getProfileInformation()])
@@ -67,11 +70,8 @@ function main() {
       const [cards, user] = data;
       userInfo.setUserInfo(user);
       userInfo.setUserAvatar(user.avatar);
-      cardList = new Section((cardData) => {
-        const card = getElementTemplate(cardData, user._id);
-        cardList.addItem(card);
-      }, ".mesto__ul");
-      cardList.renderItems(cards);
+
+      cardList.renderItems(cards, user._id);
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -86,8 +86,8 @@ function getElementTemplate(item, myUserID) {
     (name, link) => {
       popupWithImage.open(link, name);
     },
-    () => {
-      popupWithApprovalDeleteCard.open(item._id);
+    (callBack) => {
+      popupWithApprovalDeleteCard.open(item._id, callBack);
     },
     handleAddLikeCard,
     handleRemoveLikeCard,
@@ -161,12 +161,11 @@ function handleChangeAvatar() {
   });
 }
 
-
-function handleDeleteCard(id) {
+function handleDeleteCard(id, onSuccssesCallBack) {
   api
     .deleteCardServer(id)
     .then(() => {
-      popupWithApprovalDeleteCard.deleteCardFromDom()
+      onSuccssesCallBack()
       popupWithApprovalDeleteCard.close();
     })
     .catch((err) => {

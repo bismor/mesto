@@ -12,22 +12,20 @@ export default class PopupWithApproval extends Popup {
 
   _handleSumbit (evt) {
     evt.preventDefault()
-    this._popupButton.textContent = "Подождите.."
-    this._callBackSumbit(this._cardID)
+    this._popupButton.textContent = "Сохранение.."
+    this._callBackSumbit(this._cardID, this._callBack)
   }
 
   resetNameSubmit () {
     this._popupButton.textContent = "Да"
+    this._callBack = null
     this._cardID = ""
   }
 
-  open (IdCard) {
+  open (IdCard, callBack) {
+    this._callBack = callBack
     super.open()
     this._cardID = IdCard
-  }
-
-  deleteCardFromDom () {
-    document.getElementById(`${this._cardID}`)?.remove();
   }
 
   close() {

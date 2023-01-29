@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
     this._popupForm = this._popupElement.querySelector('.popup__form')
     this._handleSumbit = this._handleSumbit.bind(this);
     this._inputList = this._popupForm.querySelectorAll('.popup__text');
+    this._popupButton = this._popupElement.querySelector('.popup__button')
   }
 
   _getInputValues () {
@@ -18,14 +19,17 @@ export default class PopupWithForm extends Popup {
 
   _handleSumbit (evt) {
     evt.preventDefault()
-    this._popupElement.querySelector('.popup__button').textContent = "Подождите.."
+    this._popupButton.textContent = "Подождите.."
     this._callBackSumbit(this._getInputValues())
   }
 
   close() {
     super.close()
     this._popupForm.reset()
-    this._popupElement.querySelector('.popup__button').textContent = "Сохранить"
+  }
+
+  resetNameSubmit () {
+    this._popupButton.textContent = "Сохранить"
   }
 
   setEventListeners () {

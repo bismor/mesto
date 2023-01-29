@@ -62,7 +62,6 @@ const api = new Api();
 let cardList = undefined;
 
 function main() {
-  api.getInitialCards();
   Promise.all([api.getInitialCards(), api.getProfileInformation()])
     .then((data) => {
       const [cards, user] = data;
@@ -110,6 +109,9 @@ function handleAddCardFormSubmit() {
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
+    })
+    .finally(() => {
+      popupWithFormCard.resetNameSubmit()
     });
 }
 
@@ -128,6 +130,9 @@ function handleProfileFormSubmit(formvalue) {
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
+    })
+    .finally(() => {
+      popupWithFormProfile.resetNameSubmit()
     });
 }
 
@@ -151,6 +156,9 @@ function handleChangeAvatar() {
   api.changeProfileAvatar(avatar).then(() => {
     popupWithChangeAvatar.close();
     profileAvatar.src = avatar;
+  })
+  .finally(() => {
+    popupWithChangeAvatar.resetNameSubmit()
   });
 }
 
@@ -167,6 +175,9 @@ function handleDeleteCard(id) {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupWithApprovalDeleteCard.resetNameSubmit()
     });
 }
 

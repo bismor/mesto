@@ -7,21 +7,29 @@ export default class PopupWithApproval extends Popup {
     this._popupForm = this._popupElement.querySelector('.popup__form')
     this._handleSumbit = this._handleSumbit.bind(this);
     this._popupButton = this._popupElement.querySelector('.popup__button')
-  }
-
-  _getInputValues () {
-    const inputValue = this._popupElement.querySelector('.popup__text').value
-    return inputValue
+    this._cardID =  this._popupButton.id
+    console.log(this._popupButton.id)
   }
 
   _handleSumbit (evt) {
     evt.preventDefault()
     this._popupButton.textContent = "Подождите.."
-    this._callBackSumbit(this._getInputValues())
+    this._callBackSumbit(this._popupButton.id)
   }
 
   resetNameSubmit () {
     this._popupButton.textContent = "Да"
+    this._popupButton.id = ""
+  }
+
+  open (IdCard) {
+    super.open()
+    this._popupButton.id = IdCard
+  }
+
+  deleteCardFromDom () {
+    console.log('delete')
+    document.getElementById(`${this._popupButton.id}`)?.remove();
   }
 
   close() {
@@ -33,12 +41,6 @@ export default class PopupWithApproval extends Popup {
     super.setEventListeners()
     this._popupForm.addEventListener("submit", this._handleSumbit)
   }
-
-  setFormValues (inputsData) {
-    const allInputs = this._popupElement.querySelector('.popup__text')
-    allInputs.value = inputsData[allInputs.name]
-  }
-
 }
 
 

@@ -87,8 +87,7 @@ function getElementTemplate(item, myUserID) {
       popupWithImage.open(link, name);
     },
     () => {
-      popupWithApprovalDeleteCard.open();
-      popupWithApprovalDeleteCard.setFormValues({ payload: item._id });
+      popupWithApprovalDeleteCard.open(item._id);
     },
     handleAddLikeCard,
     handleRemoveLikeCard,
@@ -162,16 +161,13 @@ function handleChangeAvatar() {
   });
 }
 
-function deleteFromDom(selector) {
-  document.querySelector(selector)?.remove();
-}
 
 function handleDeleteCard(id) {
   api
     .deleteCardServer(id)
     .then(() => {
+      popupWithApprovalDeleteCard.deleteCardFromDom()
       popupWithApprovalDeleteCard.close();
-      deleteFromDom(`#card${id}`);
     })
     .catch((err) => {
       console.log(err);
